@@ -6,16 +6,16 @@ from delivery_tracker.models import *
 # Create your views here.
 def package_detail(request, pk):
 
-    customer_obj = Driver.objects.get(pk=pk)
+    customer_obj = Customer.objects.get(pk=pk)
 
-    car_objs = Car.objects.filter(owner_id=owner_obj.id)
+    package_objs = Package.objects.filter(customer_id=customer_obj.id)
 
     context = {
 
-        "vehicles": car_objs,
+        "packages": package_objs,
 
-        "drivers": owner_obj,
+        "customers": customer_obj,
 
     }
 
-    return render(request, "car_detail.html", context)
+    return render(request, "package_detail.html", context)
