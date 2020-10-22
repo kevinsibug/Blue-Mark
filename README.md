@@ -35,8 +35,6 @@ If you find an external Python library which you think you can use for this proj
 **It is bad practice to have ALL your big changes in just one commit. Better to get used to have a purpose for each commit.** i.e. Adding only some files for a commit, then adding the other changed files for another commit, kind of like categorizing your changes.
 6. Now that you've committed on your local repo, you can now push them to the remote repo using ```git push```. You can view previous commits on the branch using ```git log```.
 7. After you've made all your changes on your branch, make a pull request on the Github website, attempting to merge it with the master branch.
-
-Important commands:
 ```
 git branch
 git checkout [branch_name]
