@@ -16,12 +16,12 @@ Whenever you run manage.py commands, remember also that your virtual environment
 A virtual environment is a tool that helps to keep dependencies required by different projects separate by creating isolated python virtual environments for them.
 What are the commands you need to remember?
 ```
-python -m venv ~/.virtualenvs/tanongdb
+python -m venv ~/.virtualenvs/bluemark
 ```
 [For MacOS] This creates a virtual environment named tanongdb in a folder entitled .virtualenvs. 
 
 ```
-source ~/.virtualenvs/tanongdb/bin/activate
+source ~/.virtualenvs/bluemark/bin/activate
 ```
 [For MacOS] This activates your virtualenv in your Terminal window, which means you can now use the dependencies installed in your venv.
 
