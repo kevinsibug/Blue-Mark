@@ -2,7 +2,6 @@ from django.shortcuts import render
 
 from delivery_tracker.models import *
 
-
 # Create your views here.
 def package_detail(request, pk):
 
@@ -19,3 +18,6 @@ def package_detail(request, pk):
     }
 
     return render(request, "package_detail.html", context)
+
+def packages_list(request):
+    return render(request, "packages_list.html")
