@@ -5,6 +5,8 @@ Final Project for CSCI 41 - Information Management
 
 ## Initial Set-up
 
+The .env file sent to you MUST BE PRESENT in the blue_mark folder (i.e. the same folder as the settings.py). Without this .env, the website will return some errors when you try to run the server.
+
 Whenever you run manage.py commands, remember also that your virtual environment must be activated.
 
 ## Commands to Remember
@@ -12,8 +14,18 @@ Whenever you run manage.py commands, remember also that your virtual environment
 [Read more about python virtual environments here](https://www.geeksforgeeks.org/python-virtual-environment/)
 
 A virtual environment is a tool that helps to keep dependencies required by different projects separate by creating isolated python virtual environments for them.
-
 What are the commands you need to remember?
+```
+python -m venv ~/.virtualenvs/tanongdb
+```
+[For MacOS] This creates a virtual environment named tanongdb in a folder entitled .virtualenvs. 
+
+```
+source ~/.virtualenvs/tanongdb/bin/activate
+```
+[For MacOS] This activates your virtualenv in your Terminal window, which means you can now use the dependencies installed in your venv.
+
+```
 pip install -r requirements.txt
 ```
 Installs all the dependencies listed in the requirements.txt of this repo to your virtualenv. Make sure your Terminal is at the same directory as the requirements.txt. **This command should be done when setting up the Django project.**
