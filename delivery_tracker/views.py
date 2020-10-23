@@ -2,8 +2,17 @@ from django.shortcuts import render
 
 from delivery_tracker.models import *
 
-
 # Create your views here.
+
+def home(request):
+    return render(request, "home.html")
+
+def add_customer(request):
+    return render(request, "add_customer.html")
+
+def view_customers(request):
+    return render(request, "view_customers.html")
+
 def customer_detail(request, pk):
 
     customer_obj = Customer.objects.get(pk=pk)
@@ -17,5 +26,8 @@ def customer_detail(request, pk):
         "customers": customer_obj,
 
     }
-
     return render(request, "customer_detail.html", context)
+
+def packages_list(request):
+    return render(request, "packages_list.html")
+
