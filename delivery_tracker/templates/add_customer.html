@@ -1,0 +1,17 @@
+{% block page_content %}
+<!doctype html>
+
+<div class="mw6 center pa3 sans-serif">
+
+  <h1 class="mb4">Add Customer</h1>
+
+</div>
+
+<form method="POST">
+
+  <input type="text" placeholder="Enter a To-Do Item" id="id_new_item" name="item_text">
+
+  {% csrf_token %}
+</form>
+
+{% endblock %}
