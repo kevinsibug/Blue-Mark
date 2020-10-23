@@ -4,7 +4,7 @@ from delivery_tracker.models import *
 
 
 # Create your views here.
-def package_detail(request, pk):
+def customer_detail(request, pk):
 
     customer_obj = Customer.objects.get(pk=pk)
 
@@ -18,4 +18,4 @@ def package_detail(request, pk):
 
     }
 
-    return render(request, "package_detail.html", context)
+    return render(request, "customer_detail.html", context)

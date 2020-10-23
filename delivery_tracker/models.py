@@ -17,5 +17,5 @@ class Package(models.Model):
     package_weight= models.IntegerField()
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
 
-    def __str__(self):
-        return self.package_type
+    # def __str__(self):
+    #     return self.package_type

@@ -24,6 +24,6 @@ urlpatterns = [
 
     path('admin/', admin.site.urls),
 
-    path("packages/", include("delivery_tracker.urls")),
+    path("customers/", include("delivery_tracker.urls")),
 
 ]
