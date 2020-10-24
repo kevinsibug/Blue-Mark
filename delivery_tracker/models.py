@@ -1,4 +1,5 @@
 from django.db import models
+import datetime
 
 # Create your models here.
 
@@ -11,16 +12,7 @@ class Customer(models.Model):
     def __str__(self):
         return self.name
 
-class Delivery_Request(models.Model):
 
-    control_number = models.AutoField(primary_key=True)    
-    request_date = models.DateField()
-    total_cost = models.DecimalField(max_digits=8, decimal_places=2)    
-    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=False)
-    service = models.ForeignKey(Service, on_delete=models.SET_NULL, null=False)
-    package = models.ForeignKey(Package, on_delete=models.SET_NULL, null=False)
-    route = models.ForeignKey(Route, on_delete=models.SET_NULL, null=False)
-    weight_cost_matrix = models.ForeignKey(Weight_Cost_Matrix, on_delete=models.SET_NULL, null=False)
 
 
 class Package(models.Model):
@@ -41,6 +33,7 @@ class Service(models.Model):
         return self.service_type
 
 # class Weight_Cost_Matrix(models.Model):
+
     
     
 
@@ -56,7 +49,7 @@ class Route(models.Model):
 class Delivery_Receipt(models.Model):
     
     control_number = models.AutoField(primary_key=True)
-    date_delivered = models.DateField(default=date.today)
+    date_delivered = models.DateField(default=datetime.date.today)
     consignee_signature = models.ImageField()
 
 class Delivery_Staff(models.Model):
@@ -74,3 +67,14 @@ class Recipient(models.Model):
 
     def __str__(self):
         return self.name
+
+class Delivery_Request(models.Model):
+
+    control_number = models.AutoField(primary_key=True)    
+    request_date = models.DateField()
+    total_cost = models.DecimalField(max_digits=8, decimal_places=2)    
+    customer = models.ForeignKey(Customer, on_delete=models.RESTRICT, null=False)
+    service = models.ForeignKey(Service, on_delete=models.RESTRICT, null=False)
+    package = models.ForeignKey(Package, on_delete=models.RESTRICT, null=False)
+    route = models.ForeignKey(Route, on_delete=models.RESTRICT, null=False)
+    # weight_cost_matrix = models.ForeignKey(Weight_Cost_Matrix, on_delete=models.RESTRICT, null=False)
