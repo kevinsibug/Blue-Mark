@@ -18,7 +18,7 @@ What are the commands you need to remember?
 ```
 python -m venv ~/.virtualenvs/bluemark
 ```
-[For MacOS] This creates a virtual environment named tanongdb in a folder entitled .virtualenvs. 
+[For MacOS] This creates a virtual environment named bluemark in a folder entitled .virtualenvs. 
 
 ```
 source ~/.virtualenvs/bluemark/bin/activate
