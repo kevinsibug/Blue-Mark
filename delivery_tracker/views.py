@@ -12,7 +12,10 @@ def add_customer(request):
 
 def customer_confirmation(request, *args, **kwargs):
     return render(request,'customerconfirmation.html', {
-        'firstname': request.POST.get('firstname')
+        'firstname': request.POST.get('firstname'),
+        'lastname': request.POST.get('lastname'),
+        'address': request.POST.get('address'),
+        'phonenum': request.POST.get('phonenum')
     })
 
 def view_customers(request):
