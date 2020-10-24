@@ -49,14 +49,12 @@ class Service(models.Model):
         return self.service_type
 
 class Weight_Cost_Matrix(models.Model):
-
     base_weight = models.FloatField()
     base_cost = models.FloatField()
     increment_weight = models.FloatField()
     increment_cost = models.FloatField()
     
     
-
 class Route(models.Model):
 
     route_id = models.TextField(primary_key=True)
@@ -97,4 +95,7 @@ class Delivery_Request(models.Model):
     service = models.ForeignKey(Service, on_delete=models.RESTRICT, null=False)
     package = models.ForeignKey(Package, on_delete=models.RESTRICT, null=False)
     route = models.ForeignKey(Route, on_delete=models.RESTRICT, null=False)
-    # weight_cost_matrix = models.ForeignKey(Weight_Cost_Matrix, on_delete=models.RESTRICT, null=False)
+    weight_cost_matrix = models.ForeignKey(Weight_Cost_Matrix, on_delete=models.RESTRICT, null=False, default=1)
+    # matrix = models.ForeignKey(Weight_Cost_Matrix, on_delete=models.RESTRICT, null=False)
+
+
