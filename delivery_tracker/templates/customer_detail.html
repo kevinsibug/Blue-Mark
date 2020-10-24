@@ -1,35 +1,37 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block page_content %}
 
-{% block page_content %}
+<div class="mw6 center pa3 sans-serif">
+  <h1 class="mb4">Customer: {{ customers.name | linebreaks }}</h1>
 
-        <div class="mw6 center pa3 sans-serif">
+  <p class="b mb2">Address: {{ customers.address }}</p>
+  <p class="b mb2">Phone: {{ customers.phone}}</p>
 
-            <h1 class="mb4">Customer: {{ customers.name | linebreaks }}</h1>
+  <h2 class="mt4">Delivery Requests:</h2>
+  {% for r in requests %}
 
-            <header class="b mb2">Address: {{ customers.address }}</header>
+  <div class="pa2 mb3 striped--near-white">
+    <div class="pl2">
+      <p class="mb2">Control Number: {{ r.control_number }}</p>
+      <p class="mb2">Request Date: {{ r.request_date }}</p>
+      <p class="mb2">Service: {{ r.service.service_type}}</p>
+      <p class="mb2">Package Type: {{ r.package.package_type}}</p>
+      <p class="mb2">Package Weight: {{ r.package.package_weight}}</p>
+    </div>
+  </div>
 
-        {% for p in packages %}
+  {% endfor %} {% comment %} {% for p in packages %}
 
-            <div class="pa2 mb3 striped--near-white">
+  <div class="pa2 mb3 striped--near-white">
+    <div class="pl2">
+      <p class="mb2">Package ID: {{ p.id }}</p>
 
-                <div class="pl2">
+      <p class="mb2">Package Type: {{ p.package_type }}</p>
 
+      <p class="mb2">Package Weight: {{ p.package_weight }}</p>
+    </div>
+  </div>
 
-                    <p class="mb2">Package ID: {{ p.id }}</p>
-
-
-                    <p class="mb2">Package Type: {{ p.package_type }}</p>
-
-                    <p class="mb2">Package Weight: {{ p.package_weight }}</p>
-
-                </div>
-
-            </div>
-
-        {% endfor %}
-
-        </div>
-
+  {% endfor %} {% endcomment %}
+</div>
 
 {% endblock %}
-

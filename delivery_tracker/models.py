@@ -8,6 +8,7 @@ class Customer(models.Model):
     name = models.TextField()
     address = models.TextField()
     phone = models.CharField(max_length=11)
+    # customer_type = models.CharField(max_length=11)
 
     def __str__(self):
         return self.name
@@ -16,13 +17,28 @@ class Customer(models.Model):
 
 
 class Package(models.Model):
+    LETTER = 'LTR'
+    PARCEL = 'PAR'
+    PACKAGE = 'PCK'
+    BOX = 'BOX'
+    PACKAGE_TYPE_CHOICES = [
+        (LETTER, 'Letter'),
+        (PARCEL, 'Parcel'),
+        (PACKAGE, 'Package'),
+        (BOX, 'Box'),
+    ]
+    package_type = models.CharField(
+        max_length=3,
+        choices=PACKAGE_TYPE_CHOICES,
+        default=LETTER,
+    )
 
-    package_type = models.TextField()
+    # package_type = models.TextField()
     package_weight= models.IntegerField()
     # customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
 
-    # def __str__(self):
-    #     return self.package_type
+    def __str__(self):
+        return str(self.id) + " " + self.package_type
 
 class Service(models.Model):
 
@@ -32,8 +48,12 @@ class Service(models.Model):
     def __str__(self):
         return self.service_type
 
-# class Weight_Cost_Matrix(models.Model):
+class Weight_Cost_Matrix(models.Model):
 
+    base_weight = models.FloatField()
+    base_cost = models.FloatField()
+    increment_weight = models.FloatField()
+    increment_cost = models.FloatField()
     
     
 
@@ -72,7 +92,7 @@ class Delivery_Request(models.Model):
 
     control_number = models.AutoField(primary_key=True)    
     request_date = models.DateField()
-    total_cost = models.DecimalField(max_digits=8, decimal_places=2)    
+    # total_cost = models.DecimalField(max_digits=8, decimal_places=2, null=True)    
     customer = models.ForeignKey(Customer, on_delete=models.RESTRICT, null=False)
     service = models.ForeignKey(Service, on_delete=models.RESTRICT, null=False)
     package = models.ForeignKey(Package, on_delete=models.RESTRICT, null=False)
