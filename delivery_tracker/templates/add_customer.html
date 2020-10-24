@@ -8,8 +8,7 @@
 
   <h1 class="mb4">Add Customer</h1>
 
-
-<form action='http://127.0.0.1:8000/customer_confirmation' method="POST">
+<form action='http://127.0.0.1:8000/addcustomer/customerconfirmation/' method="POST">
   {% csrf_token %}
   <label> First Name </label>
   <input type="text" id="firstname" name="firstname"><br>

@@ -10,6 +10,11 @@ def home(request):
 def add_customer(request):
     return render(request, "add_customer.html")
 
+def customer_confirmation(request, *args, **kwargs):
+    return render(request,'customerconfirmation.html', {
+        'firstname': request.POST.get('firstname')
+    })
+
 def view_customers(request):
     return render(request, "view_customers.html")
 
@@ -36,4 +41,3 @@ def customer_detail(request, pk):
 
 def packages_list(request):
     return render(request, "packages_list.html")
-
