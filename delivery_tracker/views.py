@@ -11,7 +11,13 @@ def add_customer(request):
     return render(request, "add_customer.html")
 
 def view_customers(request):
-    return render(request, "view_customers.html")
+
+    customer_objs  = Customer.objects.all()
+
+    context = {
+        "customers": customer_objs
+    }
+    return render(request, "view_customers.html", context)
 
 def customer_detail(request, pk):
 
@@ -23,8 +29,8 @@ def customer_detail(request, pk):
 
     request_objs = Delivery_Request.objects.filter(customer_id=customer_obj.id)
     
-    for r in request_objs:
-        print(r.weight_cost_matrix.base_cost)
+    # for r in request_objs:
+    #     print(r.weight_cost_matrix.base_cost)
 
 
 

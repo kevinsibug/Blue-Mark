@@ -4,7 +4,10 @@
 <div class="mw6 center pa3 sans-serif">
 
   <h1 class="mb4">View Customers</h1>
-
+{% for c in customers %}
+  <p class="b mb2">{{ c.name }}</p>
+    {% comment %} <a href = '../customers/{}'.format({{ c.id }}) class="b mb2">{{ c.name }}</a> {% endcomment %}
+{% endfor %}
 </div>
 
 {% endblock %}

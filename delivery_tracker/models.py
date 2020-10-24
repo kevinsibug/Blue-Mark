@@ -48,11 +48,6 @@ class Service(models.Model):
     def __str__(self):
         return self.service_type
 
-class Weight_Cost_Matrix(models.Model):
-    base_weight = models.FloatField()
-    base_cost = models.FloatField()
-    increment_weight = models.FloatField()
-    increment_cost = models.FloatField()
     
     
 class Route(models.Model):
@@ -63,6 +58,16 @@ class Route(models.Model):
 
     def __str__(self):
         return self.origin_area + " to " + self.destination_area
+
+
+class Weight_Cost_Matrix(models.Model):
+    base_weight = models.FloatField()
+    base_cost = models.FloatField()
+    increment_weight = models.FloatField()
+    increment_cost = models.FloatField()
+    service = models.ForeignKey(Service, on_delete=models.RESTRICT, null=False)
+    route = models.ForeignKey(Route, on_delete=models.RESTRICT, null=False)
+    
 
 class Delivery_Receipt(models.Model):
     
@@ -95,7 +100,11 @@ class Delivery_Request(models.Model):
     service = models.ForeignKey(Service, on_delete=models.RESTRICT, null=False)
     package = models.ForeignKey(Package, on_delete=models.RESTRICT, null=False)
     route = models.ForeignKey(Route, on_delete=models.RESTRICT, null=False)
-    weight_cost_matrix = models.ForeignKey(Weight_Cost_Matrix, on_delete=models.RESTRICT, null=False, default=1)
+    weight_cost_matrix = models.ForeignKey(Weight_Cost_Matrix, on_delete=models.RESTRICT, null=False)
     # matrix = models.ForeignKey(Weight_Cost_Matrix, on_delete=models.RESTRICT, null=False)
+
+    def __str__(self):
+        return "[" + str(self.request_date) + "]" + " Package " + str(self.package.id) + " by " + self.customer.name
+
 
 
