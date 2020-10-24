@@ -16,7 +16,6 @@ def customer_confirmation(request, *args, **kwargs):
         'lastname': request.POST.get('lastname'),
         'address': request.POST.get('address'),
         'phonenum': request.POST.get('phonenum')
-        #test
     })
 
 def view_customers(request):
