@@ -10,7 +10,10 @@
                 <div class="pl2">
                 <table>
                   <tr><th>Control Number</th><th>Request Date</th><th>Service</th><th>Package Type</th><th>Package Weight</th></tr>
+
+                    {% for r in requests %}
                     <tr><td>{{ r.control_number }}</td><td>{{ r.request_date }}</td><td>{{ r.service.service_type}}</td><td>{{ r.package.package_type}}</td><td>{{ r.package.package_weight}}</td></tr>
+                      {% endfor %} 
                 </table>
                 </div>
               </div>

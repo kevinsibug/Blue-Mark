@@ -55,4 +55,9 @@ def customer_detail(request, pk):
     return render(request, "customer_detail.html", context)
 
 def packages_list(request):
-    return render(request, "packages_list.html")
+    request_objs = Delivery_Request.objects.all()
+
+    context = {
+        "requests": request_objs,
+    }
+    return render(request, "packages_list.html", context)
