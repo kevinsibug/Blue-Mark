@@ -4,10 +4,23 @@
 <div class="mw6 center pa3 sans-serif">
 
   <h1 class="mb4">View Customers</h1>
+  <ul class="list pl0 mt0 measure center">
 {% for c in customers %}
-  <p class="b mb2">{{ c.firstname }} {{c.lastname}}</p>
-    {% comment %} <a href = '../customers/{}'.format({{ c.id }}) class="b mb2">{{ c.name }}</a> {% endcomment %}
+  <li
+    class="flex items-center lh-copy pa3 ph0-l bb b--black-10">
+      <div class="pl3 flex-auto">
+    <a href = "{% url 'customer_detail' c.id %}" class="b mb2">{{ c.firstname }} {{ c.lastname }}</a>
+        <span class="f6 db black-70">{{c.address}}</span>
+      </div>
+      <div>
+        <a href="tel:" class="f6 link blue hover-dark-gray">{{c.phone}}</a>
+      </div>
+  </li>
+
 {% endfor %}
+</ul>
 </div>
 
+
 {% endblock %}
+

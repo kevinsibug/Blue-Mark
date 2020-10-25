@@ -1,22 +1,57 @@
-{% extends "base.html" %}
-{% block page_content %}
+{% extends "base.html" %} {% block page_content %}
 
-        <div class="mw6 center pa3 sans-serif">
+<div class="mw7 center pa3 sans-serif">
+  <h1 class="mb4">Packages</h1>
 
-            <h1 class="mb4">Packages</h1>
+  <!-- <header class="b mb2">Address: {{ customers.address }}</header> -->
+  <div class="pa2 mb3 striped--near-white">
+    <div class="pl2">
+      {% comment %}
+      <table>
+        {% endcomment %} {% comment %}
+        <tr>
+          <th>Control Number</th>
+          <th>Request Date</th>
+          <th>Service</th>
+          <th>Package Type</th>
+          <th>Package Weight</th>
+        </tr>
+        {% endcomment %}
+        <div class="cf">
+          <div class="fl w-20 tc pv5">Control Number</div>
+          <div class="fl w-20 tc pv5">Request Date</div>
+          <div class="fl w-20 tc pv5">Service</div>
+          <div class="fl w-20 tc pv5">Package Type</div>
+          <div class="fl w-20 tc pv5">Package Weight</div>
+        </div>
+        {% for r in requests %} {% comment %}
+        <tr>
+          <td>{{ r.control_number }}</td>
+          <td>{{ r.request_date }}</td>
+          <td>{{ r.service.service_type}}</td>
+          <td>{{ r.package.package_type}}</td>
+          <td>{{ r.package.package_weight}}</td>
+        </tr>
+        {% endcomment %}
+        <div class="cf">
+          <div class="fl w-20 tc pv5 bg-black-05">{{ r.control_number }}</div>
+          <div class="fl w-20 tc pv5 bg-black-10">{{ r.request_date }}</div>
+          <div class="fl w-20 tc pv5 bg-black-05">
+            {{ r.service.service_type}}
+          </div>
+          <div class="fl w-20 tc pv5 bg-black-10">
+            {{ r.package.package_type}}
+          </div>
+          <div class="fl w-20 tc pv5 bg-black-05">
+            {{ r.package.package_weight}}
+          </div>
+        </div>
 
-            <!-- <header class="b mb2">Address: {{ customers.address }}</header> -->
-              <div class="pa2 mb3 striped--near-white">
-                <div class="pl2">
-                <table>
-                  <tr><th>Control Number</th><th>Request Date</th><th>Service</th><th>Package Type</th><th>Package Weight</th></tr>
-
-                    {% for r in requests %}
-                    <tr><td>{{ r.control_number }}</td><td>{{ r.request_date }}</td><td>{{ r.service.service_type}}</td><td>{{ r.package.package_type}}</td><td>{{ r.package.package_weight}}</td></tr>
-                      {% endfor %} 
-                </table>
-                </div>
-              </div>
-            </div>
+        {% endfor %} {% comment %}
+      </table>
+      {% endcomment %}
+    </div>
+  </div>
+</div>
 
 {% endblock %}
