@@ -9,7 +9,6 @@ class Customer(models.Model):
     lastname = models.TextField()
     address = models.TextField()
     phone = models.CharField(max_length=11)
-    # customer_type = models.CharField(max_length=11)
 
     def __str__(self):
         return self.firstname + " " +  self.lastname
@@ -28,12 +27,9 @@ class Package(models.Model):
     package_type = models.CharField(
         max_length=3,
         choices=PACKAGE_TYPE_CHOICES,
-        default=LETTER,
     )
 
-    # package_type = models.TextField()
-    package_weight= models.IntegerField()
-    # customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
+    package_weight= models.IntegerField(default=0.00)
 
     def __str__(self):
         return str(self.id) + " " + self.package_type
@@ -50,18 +46,35 @@ class Service(models.Model):
 class Route(models.Model):
 
     route_id = models.TextField(primary_key=True)
-    origin_area = models.CharField(max_length=8, default="uncategorized")
-    destination_area = models.CharField(max_length=8, default="uncategorized")
+
+    LUZON = 'Luzon'
+    VISAYAS = 'Visayas'
+    MINDANAO = 'Mindanao'
+    AREA_CHOICES = [
+        (LUZON, 'Luzon'),
+        (VISAYAS, 'Visayas'),
+        (MINDANAO, 'Mindanao'),
+    ]
+    origin_area = models.CharField(
+        max_length=8,
+        choices=AREA_CHOICES,
+    )
+    destination_area = models.CharField(
+        max_length=8,
+        choices=AREA_CHOICES,
+    )
+    # origin_area = models.CharField(max_length=8, default="uncategorized")
+    # destination_area = models.CharField(max_length=8, default="uncategorized")
 
     def __str__(self):
         return self.origin_area + " to " + self.destination_area
 
 
 class Weight_Cost_Matrix(models.Model):
-    base_weight = models.FloatField()
-    base_cost = models.FloatField()
-    increment_weight = models.FloatField()
-    increment_cost = models.FloatField()
+    base_weight = models.FloatField(default=0.00)
+    base_cost = models.FloatField(default=0.00)
+    increment_weight = models.FloatField(default=0.0)
+    increment_cost = models.FloatField(default=0.0)
     service = models.ForeignKey(Service, on_delete=models.RESTRICT, null=False)
     route = models.ForeignKey(Route, on_delete=models.RESTRICT, null=False)
     
@@ -86,7 +99,6 @@ class Recipient(models.Model):
     lastname = models.TextField()
     address = models.TextField()
     phone = models.CharField(max_length=11)
-    # customer_type = models.CharField(max_length=11)
 
     def __str__(self):
         return self.firstname + " " +  self.lastname
@@ -95,13 +107,13 @@ class Delivery_Request(models.Model):
 
     control_number = models.AutoField(primary_key=True)
     request_date = models.DateField()
-    # total_cost = models.DecimalField(max_digits=8, decimal_places=2, null=True)
+    total_cost = models.DecimalField(max_digits=8, decimal_places=2, null=False, default=0)
     customer = models.ForeignKey(Customer, on_delete=models.RESTRICT, null=False)
     service = models.ForeignKey(Service, on_delete=models.RESTRICT, null=False)
     package = models.ForeignKey(Package, on_delete=models.RESTRICT, null=False)
     route = models.ForeignKey(Route, on_delete=models.RESTRICT, null=False)
     weight_cost_matrix = models.ForeignKey(Weight_Cost_Matrix, on_delete=models.RESTRICT, null=False)
-    # matrix = models.ForeignKey(Weight_Cost_Matrix, on_delete=models.RESTRICT, null=False)
+    receiver = models.ForeignKey(Recipient, on_delete=models.RESTRICT, null=False)
 
     def __str__(self):
         return "[" + str(self.request_date) + "]" + " Package " + str(self.package.id) + " by " + self.customer.firstname + " " + self.customer.lastname
