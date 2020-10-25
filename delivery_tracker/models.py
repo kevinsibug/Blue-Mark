@@ -104,6 +104,6 @@ class Delivery_Request(models.Model):
     # matrix = models.ForeignKey(Weight_Cost_Matrix, on_delete=models.RESTRICT, null=False)
 
     def __str__(self):
-        return "[" + str(self.request_date) + "]" + " Package " + str(self.package.id) + " by " + self.customer.name
+        return "[" + str(self.request_date) + "]" + " Package " + str(self.package.id) + " by " + self.customer.firstname + " " + self.customer.lastname
 
 
