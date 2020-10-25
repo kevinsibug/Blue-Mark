@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% block page_content %}
 
 <div class="mw6 center pa3 sans-serif">
-  <h1 class="mb4">Customer: {{ customers.name | linebreaks }}</h1>
+  <h1 class="mb4">Customer: {{ customers.firstname }} {{customers.lastname}}</h1>
 
   <p class="b mb2">Address: {{ customers.address }}</p>
   <p class="b mb2">Phone: {{ customers.phone}}</p>
@@ -20,19 +20,7 @@
     </div>
   </div>
 
-  {% endfor %} {% comment %} {% for p in packages %}
-
-  <div class="pa2 mb3 striped--near-white">
-    <div class="pl2">
-      <p class="mb2">Package ID: {{ p.id }}</p>
-
-      <p class="mb2">Package Type: {{ p.package_type }}</p>
-
-      <p class="mb2">Package Weight: {{ p.package_weight }}</p>
-    </div>
-  </div>
-
-  {% endfor %} {% endcomment %}
+  {% endfor %} 
 </div>
 
 {% endblock %}

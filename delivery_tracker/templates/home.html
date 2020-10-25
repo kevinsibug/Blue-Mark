@@ -5,7 +5,7 @@
 <div class="mw6 center pa3 sans-serif">
   <h1 class="mb4">Blue Mark</h1>
 
-  <form class="mb4" action="http://127.0.0.1:8000/addcustomer">
+  {% comment %} <form class="mb4" action="{% url 'add_customer' %}">
     <input type="submit" value="Add Customer" />
   </form>
 
@@ -16,6 +16,17 @@
   <form class="mb4" action="http://127.0.0.1:8000/trackpackages">
     <input type="submit" value="Track Packages" />
   </form>
+
+  <form class="mb4" action="http://127.0.0.1:8000/reports">
+    <input type="submit" value="See Reports" />
+  </form> {% endcomment %}
+
+  <div>
+  <div class = "db"><a class="f6 link dim br3 ph3 pv2 mb3 white bg-black dib w7" href="addcustomer/">Add Customer</a><div>
+  <div class = "db"><a class="f6 link dim br3 ph3 pv2 mb3 white bg-black dib w7" href="viewcustomers/">View Customers</a><div>
+  <div class = "db"><a class="f6 link dim br3 ph3 pv2 mb3 white bg-black dib w7" href="trackpackages/">Track Packages</a><div>
+ <div class = "db"> <a class="f6 link dim br3 ph3 pv2 mb3 white bg-black dib w7" href="reports/">See Reports</a><div>
+</div>
 
 </div>
 {% endblock %}
