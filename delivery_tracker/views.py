@@ -11,13 +11,19 @@ def add_customer(request):
     return render(request, "add_customer.html")
 
 def customer_confirmation(request, *args, **kwargs):
-    return render(request,'customerconfirmation.html', {
-        'firstname': request.POST.get('firstname'),
+    return render(request,'customerconfirmation.html',
+        {'firstname': request.POST.get('firstname'),
         'lastname': request.POST.get('lastname'),
         'address': request.POST.get('address'),
-        'phonenum': request.POST.get('phonenum')
-        #test
-    })
+        'phonenum': request.POST.get('phonenum'),
+        'recipientname': request.POST.get('recipientname'),
+        'destinationarea': request.POST.get('destinationarea'),
+        'recipientaddress': request.POST.get('recipientaddress'),
+        'recipientphone': request.POST.get('recipientphone'),
+        'servicetype': request.POST.get('servicetype'),
+        'packagetype': request.POST.get('packagetype'),
+        'packageweight': request.POST.get('packageweight')
+        })
 
 def view_customers(request):
 
@@ -37,7 +43,7 @@ def customer_detail(request, pk):
     # Trial
 
     request_objs = Delivery_Request.objects.filter(customer_id=customer_obj.id)
-    
+
     # for r in request_objs:
     #     print(r.weight_cost_matrix.base_cost)
 
