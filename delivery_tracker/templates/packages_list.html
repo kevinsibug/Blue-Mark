@@ -6,7 +6,14 @@
             <h1 class="mb4">Packages</h1>
 
             <!-- <header class="b mb2">Address: {{ customers.address }}</header> -->
-
+              <div class="pa2 mb3 striped--near-white">
+                <div class="pl2">
+                <table>
+                  <tr><th>Control Number</th><th>Request Date</th><th>Service</th><th>Package Type</th><th>Package Weight</th></tr>
+                    <tr><td>{{ r.control_number }}</td><td>{{ r.request_date }}</td><td>{{ r.service.service_type}}</td><td>{{ r.package.package_type}}</td><td>{{ r.package.package_weight}}</td></tr>
+                </table>
+                </div>
+              </div>
             </div>
 
 {% endblock %}

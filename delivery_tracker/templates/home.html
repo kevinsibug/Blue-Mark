@@ -1,13 +1,9 @@
-
 {% extends "base.html" %}
 
+{% block page_content %}
 
-
-
-  {% block page_content %}
-
-          <div class="mw6 center pa3 sans-serif">
-    <h1 class="mb4">Blue Mark</h1>
+<div class="mw6 center pa3 sans-serif">
+  <h1 class="mb4">Blue Mark</h1>
 
   <form class="mb4" action="http://127.0.0.1:8000/addcustomer">
     <input type="submit" value="Add Customer" />
@@ -21,8 +17,5 @@
     <input type="submit" value="Track Packages" />
   </form>
 
-  </div>
-  {% endblock %}
-
-
-</html>
+</div>
+{% endblock %}

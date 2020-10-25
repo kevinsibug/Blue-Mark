@@ -5,16 +5,14 @@ import datetime
 
 class Customer(models.Model):
 
-    name = models.TextField()
+    firstname = models.TextField()
+    lastname = models.TextField()
     address = models.TextField()
     phone = models.CharField(max_length=11)
     # customer_type = models.CharField(max_length=11)
 
     def __str__(self):
         return self.name
-
-
-
 
 class Package(models.Model):
     LETTER = 'LTR'
@@ -48,8 +46,14 @@ class Service(models.Model):
     def __str__(self):
         return self.service_type
 
-    
-    
+class Weight_Cost_Matrix(models.Model):
+
+    base_weight = models.FloatField()
+    base_cost = models.FloatField()
+    increment_weight = models.FloatField()
+    increment_cost = models.FloatField()
+
+
 class Route(models.Model):
 
     route_id = models.TextField(primary_key=True)
@@ -70,7 +74,7 @@ class Weight_Cost_Matrix(models.Model):
     
 
 class Delivery_Receipt(models.Model):
-    
+
     control_number = models.AutoField(primary_key=True)
     date_delivered = models.DateField(default=datetime.date.today)
     consignee_signature = models.ImageField()
@@ -93,9 +97,9 @@ class Recipient(models.Model):
 
 class Delivery_Request(models.Model):
 
-    control_number = models.AutoField(primary_key=True)    
+    control_number = models.AutoField(primary_key=True)
     request_date = models.DateField()
-    # total_cost = models.DecimalField(max_digits=8, decimal_places=2, null=True)    
+    # total_cost = models.DecimalField(max_digits=8, decimal_places=2, null=True)
     customer = models.ForeignKey(Customer, on_delete=models.RESTRICT, null=False)
     service = models.ForeignKey(Service, on_delete=models.RESTRICT, null=False)
     package = models.ForeignKey(Package, on_delete=models.RESTRICT, null=False)
@@ -105,6 +109,5 @@ class Delivery_Request(models.Model):
 
     def __str__(self):
         return "[" + str(self.request_date) + "]" + " Package " + str(self.package.id) + " by " + self.customer.name
-
 
 
