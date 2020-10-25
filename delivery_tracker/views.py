@@ -96,4 +96,15 @@ def reports_page(request):
     context = {
         "requests": request_objs,
     }
+    return render(request, "reports_page.html", context)
+
+def reports(request):
+    origin = request.GET['origin']
+    destination = request.GET['destination']
+
+    context = {
+        "origin": origin,
+        "destination": destination
+    }
+
     return render(request, "reports.html", context)

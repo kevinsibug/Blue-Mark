@@ -1,0 +1,42 @@
+{% extends "base.html" %} {% block page_content %}
+
+<div class="mw6 center pa3 sans-serif">
+</h1>Reports Per Area</h1>
+  <form class="pa4 black-80" action="{% url 'reports' %}">
+    <div class="measure">
+      <label for="origin" class="f6 b db mb2">Origin</label>
+      <select
+        name="origin"
+        id="origin"
+        class=" ba b--black-20 pa2 mb2 db w-100"
+      >
+        <option value="Luzon">Luzon</option>
+        <option value="Visayas">Visayas</option>
+        <option value="Mindanao">Mindanao</option>
+      </select>
+      <small id="origin-desc" class="f6 black-60 db mb2"
+        >Location from where the package is from
+      </small>
+    </div>
+    <div class="measure">
+      <label for="destination" class="f6 b db mb2">Destination</label>
+      <select
+        name="destination"
+        id="destination"
+        class=" ba b--black-20 pa2 mb2 db w-100"
+      >
+        <option value="Luzon">Luzon</option>
+        <option value="Visayas">Visayas</option>
+        <option value="Mindanao">Mindanao</option>
+      </select>
+      <small id="destination-desc" class="f6 black-60 db mb2"
+        >Location of the destination of the package
+      </small>
+    </div>
+
+        <input type="submit" value="View Packages From Area" />
+
+  </form>
+</div>
+
+{% endblock %}
