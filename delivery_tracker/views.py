@@ -11,17 +11,18 @@ def add_customer(request):
     return render(request, "add_customer.html")
 
 def customer_confirmation(request):
-    print("Hello form is submitted.")
     firstname = request.POST['firstname']
     lastname = request.POST['lastname']
     address = request.POST['address']
+    originarea = request.POST['originarea']
     phonenum = request.POST['phonenum']
 
     recipientfirstname = request.POST['recipientfirstname']
     recipientlastname = request.POST['recipientlastname']
-    destinationarea = request.POST['destinationarea']
     recipientaddress = request.POST['recipientaddress']
     recipientphone = request.POST['recipientphone']
+
+    destinationarea = request.POST['destinationarea']
     servicetype = request.POST['servicetype']
     packagetype = request.POST['packagetype']
     packageweight = request.POST['packageweight']
@@ -36,6 +37,7 @@ def customer_confirmation(request):
         {'firstname': request.POST.get('firstname'),
         'lastname': request.POST.get('lastname'),
         'address': request.POST.get('address'),
+        'originarea': request.POST.get('originarea'),
         'phonenum': request.POST.get('phonenum'),
         'recipientfirstname': request.POST.get('recipientfirstname'),
         'recipientlastname': request.POST.get('recipientlastname'),
