@@ -12,7 +12,7 @@ class Customer(models.Model):
     # customer_type = models.CharField(max_length=11)
 
     def __str__(self):
-        return self.name
+        return self.firstname + " " +  self.lastname
 
 class Package(models.Model):
     LETTER = 'LTR'
@@ -45,13 +45,6 @@ class Service(models.Model):
 
     def __str__(self):
         return self.service_type
-
-class Weight_Cost_Matrix(models.Model):
-
-    base_weight = models.FloatField()
-    base_cost = models.FloatField()
-    increment_weight = models.FloatField()
-    increment_cost = models.FloatField()
 
 
 class Route(models.Model):
