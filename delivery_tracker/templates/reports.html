@@ -1,16 +1,8 @@
 {% extends "base.html" %} {% block page_content %}
 
-<p>{{origin}}</p>
-<p>{{destination}}</p>
-{% comment %} <div class="mw6 center pa3 sans-serif">
-  <h1 class="mb4">Customer: {{ customers.firstname }} {{customers.lastname}}</h1>
-
-  <p class="b mb2">Address: {{ customers.address }}</p>
-  <p class="b mb2">Phone: {{ customers.phone}}</p>
-
-  <h2 class="mt4">Delivery Requests:</h2>
+<div class="mw6 center pa3 sans-serif">
+<h1 class = "mb4">{{origin}} to {{destination}} Packages</h1>
   {% for r in requests %}
-
   <div class="pa2 mb3 striped--near-white">
     <div class="pl2">
       <p class="mb2">Control Number: {{ r.control_number }}</p>
@@ -23,6 +15,5 @@
   </div>
 
   {% endfor %} 
-</div> {% endcomment %}
-
+</div>
 {% endblock %}

@@ -102,9 +102,12 @@ def reports(request):
     origin = request.GET['origin']
     destination = request.GET['destination']
 
+    request_objs = Delivery_Request.objects.filter(route__origin_area=origin).filter(route__destination_area=destination)
+
     context = {
         "origin": origin,
-        "destination": destination
+        "destination": destination,
+        "requests": request_objs
     }
 
     return render(request, "reports.html", context)
