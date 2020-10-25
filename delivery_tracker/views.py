@@ -10,13 +10,35 @@ def home(request):
 def add_customer(request):
     return render(request, "add_customer.html")
 
-def customer_confirmation(request, *args, **kwargs):
+def customer_confirmation(request):
+    print("Hello form is submitted.")
+    firstname = request.POST['firstname']
+    lastname = request.POST['lastname']
+    address = request.POST['address']
+    phonenum = request.POST['phonenum']
+
+    recipientfirstname = request.POST['recipientfirstname']
+    recipientlastname = request.POST['recipientlastname']
+    destinationarea = request.POST['destinationarea']
+    recipientaddress = request.POST['recipientaddress']
+    recipientphone = request.POST['recipientphone']
+    servicetype = request.POST['servicetype']
+    packagetype = request.POST['packagetype']
+    packageweight = request.POST['packageweight']
+
+    customer = Customer(firstname=firstname, lastname=lastname, address=address, phone=phonenum)
+    customer.save()
+
+    recipient = Recipient(firstname=recipientfirstname, lastname=recipientlastname, address=recipientaddress, phone=recipientphone)
+    recipient.save()
+
     return render(request,'customerconfirmation.html',
         {'firstname': request.POST.get('firstname'),
         'lastname': request.POST.get('lastname'),
         'address': request.POST.get('address'),
         'phonenum': request.POST.get('phonenum'),
-        'recipientname': request.POST.get('recipientname'),
+        'recipientfirstname': request.POST.get('recipientfirstname'),
+        'recipientlastname': request.POST.get('recipientlastname'),
         'destinationarea': request.POST.get('destinationarea'),
         'recipientaddress': request.POST.get('recipientaddress'),
         'recipientphone': request.POST.get('recipientphone'),
