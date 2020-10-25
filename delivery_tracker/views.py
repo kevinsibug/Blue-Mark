@@ -74,4 +74,4 @@ def reports_page(request):
     context = {
         "requests": request_objs,
     }
-    return render(request, "packages_list.html", context)
+    return render(request, "reports.html", context)
