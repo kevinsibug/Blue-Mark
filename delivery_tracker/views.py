@@ -5,6 +5,8 @@ from delivery_tracker.models import *
 # Create your views here.
 
 def home(request):
+    entries= Delivery_Staff.objects.all()
+    entries.delete()
     return render(request, "home.html")
 
 def add_customer(request):

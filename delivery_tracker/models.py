@@ -74,19 +74,22 @@ class Delivery_Receipt(models.Model):
 
 class Delivery_Staff(models.Model):
 
-    staff_name = models.TextField()
+    staff_firstname = models.TextField()
+    staff_lastname = models.TextField()
 
     def __str__(self):
-        return self.staff_name
+        return self.staff_firstname + " " + self.staff_lastname
 
 class Recipient(models.Model):
 
-    name = models.TextField()
+    firstname = models.TextField()
+    lastname = models.TextField()
     address = models.TextField()
     phone = models.CharField(max_length=11)
+    # customer_type = models.CharField(max_length=11)
 
     def __str__(self):
-        return self.name
+        return self.firstname + " " +  self.lastname
 
 class Delivery_Request(models.Model):
 
