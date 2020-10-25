@@ -10,6 +10,8 @@
 
 <form action='http://127.0.0.1:8000/addcustomer/customerconfirmation/' method="POST">
   {% csrf_token %}
+  <label> Date of Request</label>
+  <input type="date" class="form-control" id="date" value="{{Delivery_Request.request_date|date:"Y-m-d" }}"><br>
   <label> First Name </label>
   <input type="text" id="firstname" name="firstname" required><br>
   <br>
@@ -23,7 +25,7 @@
   <input type="radio" id="luzon" name="originarea" value="Luzon" checked="checked">
   <label for="luzon">Luzon</label><br>
   <input type="radio" id="visayas" name="originarea" value="Visayas">
-  <label for="visyas">Visayas</label><br>
+  <label for="visayas">Visayas</label><br>
   <input type="radio" id="mindanao" name="originarea" value="Mindanao">
   <label for="mindanao">Mindanao</label><br>
   <br>
