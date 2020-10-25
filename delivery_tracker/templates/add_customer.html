@@ -28,7 +28,7 @@
   <label for="mindanao">Mindanao</label><br>
   <br>
   <label> Phone Number</label>
-  <input type="text" id="phonenum" name="phonenum" required><br>
+  <input type="text" pattern="[0-9]+" title="Please enter numbers only." id="phonenum" name="phonenum" required><br>
   <br>
 
   <h3> Recipient Details </h3>
@@ -50,7 +50,7 @@
   <input type="text" id="recipientaddress" name="recipientaddress" required><br>
   <br>
   <label> Recipient Phone Number </label>
-  <input type="text" id="recipientphone" name="recipientphone" required><br>
+  <input type="text" pattern="[0-9]+" title="Please enter numbers only." id="recipientphone" name="recipientphone" required><br>
   <br>
   <label> Service Type</label><br>
   <input type="radio" id="express" name="servicetype" value="Express" checked="checked">
@@ -67,7 +67,7 @@
   </select><br>
   <br>
   <label> Weight</label>
-  <input type="text" id="weight" name="packageweight" required><br>
+  <input type="text" pattern="[0-9]+" title="Please enter numbers only." id="weight" name="packageweight" required><br>
   <br>
   <br>
   <label>Total Cost</label>
