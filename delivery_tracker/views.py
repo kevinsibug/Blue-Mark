@@ -28,6 +28,7 @@ def customer_confirmation(request):
     packagebweight = request.POST['packagebweight']
     packagesweight = request.POST['packagesweight']
 
+
     deliverystaff = Delivery_Staff(staff_firstname="Juan", staff_lastname="Dela Cruz")
     deliverystaff.save()
 

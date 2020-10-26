@@ -32,7 +32,7 @@ class Package(models.Model):
     package_weight= models.IntegerField(default=0.00)
 
     def __str__(self):
-        return str(self.id) + " " + self.package_type
+        return self.package_type
 
 class Service(models.Model):
 
@@ -77,7 +77,7 @@ class Weight_Cost_Matrix(models.Model):
     increment_cost = models.FloatField(default=0.0)
     service = models.ForeignKey(Service, on_delete=models.RESTRICT, null=False)
     route = models.ForeignKey(Route, on_delete=models.RESTRICT, null=False)
-    
+
 
 
 

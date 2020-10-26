@@ -25,12 +25,12 @@
   <input type="text" id="address" name="address" placeholder="House No., Street, Barangay, City, Region, Postal Code" required><br>
   <br> -->
   <label> Origin Area </label><br>
-  <input type="radio" id="luzon" name="originarea" value="Luzon" checked="checked">
-  <label for="luzon">Luzon</label><br>
-  <input type="radio" id="visayas" name="originarea" value="Visayas">
-  <label for="visayas">Visayas</label><br>
-  <input type="radio" id="mindanao" name="originarea" value="Mindanao">
-  <label for="mindanao">Mindanao</label><br>
+  <select name="originarea" id="originarea" required>
+    <option value="Luzon">Luzon</option>
+    <option value="Visayas">Visayas</option>
+    <option value="Mindanao">Mindanao</option>
+  </select><br>
+  <br>
   <br>
   <!-- <label> Phone Number</label>
   <input type="text" id="phonenum" name="phonenum" required><br>
@@ -44,12 +44,11 @@
   <input type="text" id="recipientlastname" name="recipientlastname" required><br>
   <br> -->
   <label> Destination Area </label><br>
-  <input type="radio" id="luzon" name="destinationarea" value="Luzon" checked="checked">
-  <label for="luzon">Luzon</label><br>
-  <input type="radio" id="visayas" name="destinationarea" value="Visayas">
-  <label for="visyas">Visayas</label><br>
-  <input type="radio" id="mindanao" name="destinationarea" value="Mindanao">
-  <label for="mindanao">Mindanao</label><br>
+  <select name="destinationarea" id="destinationarea" required>
+    <option value="Luzon">Luzon</option>
+    <option value="Visayas">Visayas</option>
+    <option value="Mindanao">Mindanao</option>
+  </select><br>
   <br>
   <!-- <label> Recipient Address</label>
   <input type="text" id="recipientaddress" name="recipientaddress" required><br>
