@@ -60,20 +60,11 @@ def customer_detail(request, pk):
 
     customer_obj = Customer.objects.get(pk=pk)
 
-    # package_objs = Package.objects.filter(customer_id=customer_obj.id)
-
-    # Trial
 
     request_objs = Delivery_Request.objects.filter(customer_id=customer_obj.id)
 
-    # for r in request_objs:
-    #     print(r.weight_cost_matrix.base_cost)
-
-
 
     context = {
-
-        # "packages": package_objs,
 
         "customers": customer_obj,
 
