@@ -31,7 +31,7 @@ class Package(models.Model):
     package_weight= models.IntegerField(default=0.00)
 
     def __str__(self):
-        return self.package_type
+        return self.package_type + " " + str(self.package_weight)
 
 class Service(models.Model):
 
