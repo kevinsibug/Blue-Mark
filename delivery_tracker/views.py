@@ -45,7 +45,6 @@ def customer_confirmation(request):
     if service.service_type == 'Express':
         service = Service(service_type=servicetype, delivery_time='Next Day')
         service.save()
-        print(type(service))
     elif service.service_type == 'Ordinary':
         service = Service(service_type=servicetype, delivery_time='3 to 4 Days')
         service.save()
@@ -80,7 +79,7 @@ def customer_confirmation(request):
                 receiver=recipient
                 )
                 deliveryrequest.save()
-                print('hello')
+                print(str(deliveryrequest.total_cost))
 
             elif int(packageweight) >= 100 and int(packageweight) < 200:
                 weightcostmatrix = Weight_Cost_Matrix(
@@ -174,6 +173,7 @@ def customer_confirmation(request):
         'servicetype': request.POST.get('servicetype'),
         'packagetype': request.POST.get('packagetype'),
         'packageweight': request.POST.get('packageweight'),
+        'totalcost': deliveryrequest.total_cost,
         })
 
 def view_customers(request):
