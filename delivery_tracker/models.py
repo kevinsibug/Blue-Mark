@@ -72,8 +72,8 @@ class Route(models.Model):
 class Weight_Cost_Matrix(models.Model):
     base_weight = models.FloatField(default=0.00)
     base_cost = models.FloatField(default=0.00)
-    increment_weight = models.FloatField(default=0.0)
-    increment_cost = models.FloatField(default=0.0)
+    increment_weight = models.FloatField(default=0.00)
+    increment_cost = models.FloatField(default=0.00)
     service = models.ForeignKey(Service, on_delete=models.RESTRICT, null=False)
     route = models.ForeignKey(Route, on_delete=models.RESTRICT, null=False)
 

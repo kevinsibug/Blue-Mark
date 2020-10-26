@@ -59,7 +59,7 @@ def customer_confirmation(request):
         if package.package_type == 'LTR':
             if int(packageweight) > 0 and int(packageweight) < 100:
                 weightcostmatrix = Weight_Cost_Matrix(
-                base_weight=packageweight,
+                base_weight=int(packageweight),
                 base_cost=70.00,
                 increment_weight=0,
                 increment_cost=0,
@@ -79,23 +79,34 @@ def customer_confirmation(request):
                 receiver=recipient
                 )
                 deliveryrequest.save()
-                print(str(deliveryrequest.total_cost))
 
             elif int(packageweight) >= 100 and int(packageweight) < 200:
                 weightcostmatrix = Weight_Cost_Matrix(
                 base_weight=100,
                 base_cost=70.00,
-                increment_weight=packageweight-100,
+                increment_weight=int(packageweight) -100,
                 increment_cost=35.00,
                 service=service,
                 route=route
                 )
                 weightcostmatrix.save()
 
+                deliveryrequest = Delivery_Request(
+                request_date=date.today(),
+                total_cost=(weightcostmatrix.base_cost + weightcostmatrix.increment_cost),
+                customer=customer,
+                service=service,
+                package=package,
+                route=route,
+                weight_cost_matrix=weightcostmatrix,
+                receiver=recipient
+                )
+                deliveryrequest.save()
+
         elif package.package_type == 'PCK':
             if int(packageweight) > 200 and int(packageweight) < 500:
                 weightcostmatrix = Weight_Cost_Matrix(
-                base_weight=packageweight,
+                base_weight=int(packageweight),
                 base_cost=90.00,
                 increment_weight=0,
                 increment_cost=0,
@@ -107,7 +118,7 @@ def customer_confirmation(request):
                 weightcostmatrix = Weight_Cost_Matrix(
                 base_weight=500,
                 base_cost=90.00,
-                increment_weight=packageweight-500,
+                increment_weight=int(packageweight)-500,
                 increment_cost=45.00,
                 service=service,
                 route=route
@@ -117,7 +128,7 @@ def customer_confirmation(request):
         elif package.package_type == 'PAR':
             if int(packageweight) > 1000 and int(packageweight) < 1500:
                 weightcostmatrix = Weight_Cost_Matrix(
-                base_weight=packageweight,
+                base_weight=int(packageweight),
                 base_cost=150.00,
                 increment_weight=0,
                 increment_cost=0,
@@ -129,7 +140,7 @@ def customer_confirmation(request):
                 weightcostmatrix = Weight_Cost_Matrix(
                 base_weight=1500,
                 base_cost=150.00,
-                increment_weight=packageweight-1500,
+                increment_weight=int(packageweight)-1500,
                 increment_cost=75.00,
                 service=service,
                 route=route
@@ -139,7 +150,7 @@ def customer_confirmation(request):
         elif package.package_type == 'BOX':
             if int(packageweight) > 2000 and int(packageweight) < 2500:
                 weightcostmatrix = Weight_Cost_Matrix(
-                base_weight=packageweight,
+                base_weight=int(packageweight),
                 base_cost=170.00,
                 increment_weight=0,
                 increment_cost=0,
@@ -151,7 +162,7 @@ def customer_confirmation(request):
                 weightcostmatrix = Weight_Cost_Matrix(
                 base_weight=1500,
                 base_cost=170.00,
-                increment_weight=packageweight-2500,
+                increment_weight=int(packageweight)-2500,
                 increment_cost=85.00,
                 service=service,
                 route=route
