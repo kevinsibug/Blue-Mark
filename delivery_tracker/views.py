@@ -9,8 +9,8 @@ from datetime import date
 def home(request):
     return render(request, "home.html")
 
-def add_customer(request):
-    return render(request, "add_customer.html")
+def create_delivery_request(request):
+    return render(request, "create_delivery_request.html")
 
 def customer_confirmation(request):
 
@@ -109,7 +109,7 @@ def customer_detail(request, pk):
             receipt = Delivery_Receipt.objects.get(delivery_request = r)
         except Delivery_Receipt.DoesNotExist:
             receipt = False
-        
+
         # normal_division = str(r.package.package_weight / r.weight_cost_matrix.base_weight)
         # modulo_division = str(r.package.package_weight % r.weight_cost_matrix.base_weight)
         weight = r.package.package_weight
@@ -180,7 +180,7 @@ def reports(request):
             receipt = Delivery_Receipt.objects.get(delivery_request = r)
         except Delivery_Receipt.DoesNotExist:
             receipt = False
-        
+
         if (receipt):
             r.delivered = "Delivered"
         else:

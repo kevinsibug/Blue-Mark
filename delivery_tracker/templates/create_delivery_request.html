@@ -5,16 +5,12 @@
 
 
 <div class="mw6 center pa3 sans-serif">
-  <p><b>Staff Name</b>  Juan Dela Cruz </p>
-  <br>
-
-  <h1 class="mb4">Add Customer</h1>
+  <h1 class="mb4">Create Delivery Request</h1>
 
 <form action='http://127.0.0.1:8000/addcustomer/customerconfirmation/' method="POST">
   {% csrf_token %}
   <label> Date of Request</label>
-
-  <input type="date" class="form-control" id="date" value={{Delivery_Request.request_date|date:"Y-m-d" }} name="requestdate" required><br>
+  <input type="date" class="form-control" id="date" name="requestdate" value="{{Delivery_Request.request_date|date:"Y-m-d" }}" required><br>
 
   <br>
   <h3>Sender Details</h3>
