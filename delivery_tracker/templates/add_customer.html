@@ -5,6 +5,8 @@
 
 
 <div class="mw6 center pa3 sans-serif">
+  <p><b>Staff Name</b>  Juan Dela Cruz </p>
+  <br>
 
   <h1 class="mb4">Add Customer</h1>
 
@@ -12,6 +14,7 @@
   {% csrf_token %}
   <label> Date of Request</label>
   <input type="date" class="form-control" id="date" value="{{Delivery_Request.request_date|date:"Y-m-d" }}"required><br>
+  <br>
   <label> First Name </label>
   <input type="text" id="firstname" name="firstname" required><br>
   <br>
@@ -19,7 +22,7 @@
   <input type="text" id="lastname" name="lastname" required><br>
   <br>
   <label> Address </label>
-  <input type="text" id="address" name="address" required><br>
+  <input type="text" id="address" name="address" placeholder="House No., Street, Barangay, City, Region, Postal Code" required><br>
   <br>
   <label> Origin Area </label><br>
   <input type="radio" id="luzon" name="originarea" value="Luzon" checked="checked">
@@ -62,17 +65,15 @@
   <br>
   <label> Package Type</label>
   <select name="packagetype" id="packagetype" required>
-    <option value="Letter">Letter</option>
-    <option value="Package">Package</option>
-    <option value="Parcel">Parcel</option>
-    <option value="Box">Box</option>
+    <option value="LTR">Letter</option>
+    <option value="PCK">Package</option>
+    <option value="PAR">Parcel</option>
+    <option value="BOX">Box</option>
   </select><br>
   <br>
   <label> Weight</label>
   <input type="text" id="weight" name="packageweight" required><br>
   <br>
-  <br>
-  <label>Total Cost</label>
 <br>
 
 <button onclick="location.href='http://127.0.0.1:8000'" type="button"> Back</button>

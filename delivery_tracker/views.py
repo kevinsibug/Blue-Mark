@@ -30,8 +30,21 @@ def customer_confirmation(request):
     customer = Customer(firstname=firstname, lastname=lastname, address=address, phone=phonenum)
     customer.save()
 
+    package = Package(package_type=packagetype, package_weight=packageweight)
+    package.save()
+
+    service = Service(service_type=servicetype)
+    service.save()
+
+    route = Route(origin_area=originarea, destination_area=destinationarea)
+    route.save()
+
     recipient = Recipient(firstname=recipientfirstname, lastname=recipientlastname, address=recipientaddress, phone=recipientphone)
     recipient.save()
+
+    deliverystaff = Delivery_Staff(staff_firstname="Juan", staff_lastname="Dela Cruz")
+    deliverystaff.save()
+
 
     return render(request,'customerconfirmation.html',
         {'firstname': request.POST.get('firstname'),
