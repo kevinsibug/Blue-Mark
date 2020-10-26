@@ -37,6 +37,15 @@ def customer_confirmation(request):
     service = Service(service_type=servicetype)
     service.save()
 
+    if service.service_type == 'Express':
+        service = Service(service_type=servicetype, delivery_time='Next Day')
+        service.save()
+        print('hello')
+    elif service.service_type == 'Ordinary':
+        service = Service(service_type=servicetype, delivery_time='3 to 4 Days')
+        service.save()
+        print('hi')
+
     route = Route(origin_area=originarea, destination_area=destinationarea)
     route.save()
 

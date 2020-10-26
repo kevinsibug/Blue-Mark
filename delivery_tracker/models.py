@@ -31,7 +31,7 @@ class Package(models.Model):
     package_weight= models.IntegerField(default=0.00)
 
     def __str__(self):
-        return self.package_type
+        return self.package_type + " " + str(self.package_weight)
 
 class Service(models.Model):
 
@@ -108,7 +108,8 @@ class Delivery_Request(models.Model):
     receiver = models.ForeignKey(Recipient, on_delete=models.RESTRICT, null=False)
 
     def __str__(self):
-        return "[" + str(self.request_date) + "]" + " Package " + str(self.package.id) + " by " + self.customer.firstname + " " + self.customer.lastname
+        return  str(self.package.id)
+        # return "[" + str(self.request_date) + "]" + " Package " + str(self.package.id) + " by " + self.customer.firstname + " " + self.customer.lastname
 
 
 
