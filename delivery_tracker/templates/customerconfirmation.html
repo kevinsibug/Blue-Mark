@@ -7,7 +7,7 @@
     <h1 class="mb4">Review Transaction Details</h1>
 
 <h3>Sender Details</h3>
-<label><b>First Name </b></label>
+<!-- <label><b>First Name </b></label>
 <p> {{ firstname }} </p><br>
 <br>
 <label><b>Last Name </b></label>
@@ -15,42 +15,47 @@
 <br>
 <label><b> Address </b></label>
 <p> {{ address }} </p><br>
-<br>
+<br> -->
 <label><b> Origin Area </b></label>
 <p> {{ originarea }} </p><br>
 <br>
-<label><b> Phone Number </b></label>
+<!-- <label><b> Phone Number </b></label>
 <p> {{ phonenum }} </p><br>
-<br>
+<br> -->
 
-<h3> Recipient Details </h3>
+<!-- <h3> Recipient Details </h3>
 <label><b> Recipient First Name </b></label>
 <p> {{ recipientfirstname }} </p><br>
 <br>
 <label><b> Recipient Last Name </b></label>
 <p> {{ recipientlastname }} </p><br>
-<br>
+<br> -->
 <label><b> Destination Area </b></label><br>
 <p> {{ destinationarea }} </p><br>
 <br>
-<label><b> Recipient Address</b></label>
+<!-- <label><b> Recipient Address</b></label>
 <p> {{ recipientaddress }} </p><br>
 <br>
 <label><b> Recipient Phone Number </b></label>
 <p> {{ recipientphone }} </p><br>
-<br>
+<br> -->
 
 <h3>Package Details</h3>
 <label><b> Service Type</b></label><br>
 <p> {{ servicetype }} </p><br>
 <br>
+<label><b> Route</b></label><br>
+<p> {{ originarea }} to {{destinationarea}}</p><br>
+<br>
 <label><b> Package Type</b></label>
 <p> {{ packagetype }} </p><br>
 <br>
-<label><b> Weight</b></label>
-<p> {{ packageweight }} </p><br>
+<label><b> Package Base Weight</b></label>
+<p> {{ packagebweight }} </p><br>
 <br>
-
+<label><b> Succeeding Weight</b></label>
+<p> {{ packagesweight }} </p><br>
+<br>
 <br>
 <label><b>Total Cost</b></label>
 <br>

@@ -11,27 +11,28 @@ def add_customer(request):
     return render(request, "add_customer.html")
 
 def customer_confirmation(request):
-    firstname = request.POST['firstname']
-    lastname = request.POST['lastname']
-    address = request.POST['address']
+    # firstname = request.POST['firstname']
+    # lastname = request.POST['lastname']
+    # address = request.POST['address']
     originarea = request.POST['originarea']
-    phonenum = request.POST['phonenum']
-
-    recipientfirstname = request.POST['recipientfirstname']
-    recipientlastname = request.POST['recipientlastname']
-    recipientaddress = request.POST['recipientaddress']
-    recipientphone = request.POST['recipientphone']
+    # phonenum = request.POST['phonenum']
+    #
+    # recipientfirstname = request.POST['recipientfirstname']
+    # recipientlastname = request.POST['recipientlastname']
+    # recipientaddress = request.POST['recipientaddress']
+    # recipientphone = request.POST['recipientphone']
 
     destinationarea = request.POST['destinationarea']
     servicetype = request.POST['servicetype']
     packagetype = request.POST['packagetype']
-    packageweight = request.POST['packageweight']
+    packagebweight = request.POST['packagebweight']
+    packagesweight = request.POST['packagesweight']
 
-    customer = Customer(firstname=firstname, lastname=lastname, address=address, phone=phonenum)
-    customer.save()
+    deliverystaff = Delivery_Staff(staff_firstname="Juan", staff_lastname="Dela Cruz")
+    deliverystaff.save()
 
-    package = Package(package_type=packagetype, package_weight=packageweight)
-    package.save()
+    # customer = Customer(firstname=firstname, lastname=lastname, address=address, phone=phonenum)
+    # customer.save()
 
     service = Service(service_type=servicetype)
     service.save()
@@ -39,27 +40,30 @@ def customer_confirmation(request):
     route = Route(origin_area=originarea, destination_area=destinationarea)
     route.save()
 
-    recipient = Recipient(firstname=recipientfirstname, lastname=recipientlastname, address=recipientaddress, phone=recipientphone)
-    recipient.save()
+    # recipient = Recipient(firstname=recipientfirstname, lastname=recipientlastname, address=recipientaddress, phone=recipientphone)
+    # recipient.save()
 
-    deliverystaff = Delivery_Staff(staff_firstname="Juan", staff_lastname="Dela Cruz")
-    deliverystaff.save()
+    package = Package(package_type=packagetype, package_weight=packagebweight)
+    package.save()
 
+    weightcostmatrix = Weight_Cost_Matrix(base_weight=packagebweight, increment_weight=packagesweight, service=service, route=route)
+    weightcostmatrix.save()
 
     return render(request,'customerconfirmation.html',
-        {'firstname': request.POST.get('firstname'),
-        'lastname': request.POST.get('lastname'),
-        'address': request.POST.get('address'),
-        'originarea': request.POST.get('originarea'),
-        'phonenum': request.POST.get('phonenum'),
-        'recipientfirstname': request.POST.get('recipientfirstname'),
-        'recipientlastname': request.POST.get('recipientlastname'),
+        # {'firstname': request.POST.get('firstname'),
+        # 'lastname': request.POST.get('lastname'),
+        # 'address': request.POST.get('address'),
+        {'originarea': request.POST.get('originarea'),
+        # 'phonenum': request.POST.get('phonenum'),
+        # 'recipientfirstname': request.POST.get('recipientfirstname'),
+        # 'recipientlastname': request.POST.get('recipientlastname'),
         'destinationarea': request.POST.get('destinationarea'),
-        'recipientaddress': request.POST.get('recipientaddress'),
-        'recipientphone': request.POST.get('recipientphone'),
+        # 'recipientaddress': request.POST.get('recipientaddress'),
+        # 'recipientphone': request.POST.get('recipientphone'),
         'servicetype': request.POST.get('servicetype'),
         'packagetype': request.POST.get('packagetype'),
-        'packageweight': request.POST.get('packageweight')
+        'packagebweight': request.POST.get('packagebweight'),
+        'packagesweight': request.POST.get('packagesweight')
         })
 
 def view_customers(request):
