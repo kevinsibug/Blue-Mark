@@ -13,6 +13,7 @@ def add_customer(request):
     return render(request, "add_customer.html")
 
 def customer_confirmation(request):
+
     firstname = request.POST['firstname']
     lastname = request.POST['lastname']
     address = request.POST['address']
@@ -72,7 +73,7 @@ def customer_confirmation(request):
 
     return render(request,'customerconfirmation.html',
 
-        {'requestdate': request.POST.get('requestdate'),
+        {'requestdate': date.today(),
         'firstname': request.POST.get('firstname'),
 
         'lastname': request.POST.get('lastname'),
@@ -105,7 +106,7 @@ def customer_detail(request, pk):
 
     for r in request_objs:
         try:
-            receipt = Delivery_Receipt.objects.get(control_number = r.control_number)
+            receipt = Delivery_Receipt.objects.get(delivery_request = r)
         except Delivery_Receipt.DoesNotExist:
             receipt = False
         
@@ -145,7 +146,7 @@ def packages_list(request):
 
     for r in request_objs:
         try:
-            receipt = Delivery_Receipt.objects.get(control_number = r.control_number)
+            receipt = Delivery_Receipt.objects.get(delivery_request = r)
         except Delivery_Receipt.DoesNotExist:
             receipt = False
 
@@ -176,7 +177,7 @@ def reports(request):
 
     for r in request_objs:
         try:
-            receipt = Delivery_Receipt.objects.get(control_number = r.control_number)
+            receipt = Delivery_Receipt.objects.get(delivery_request = r)
         except Delivery_Receipt.DoesNotExist:
             receipt = False
         
