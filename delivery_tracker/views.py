@@ -79,11 +79,33 @@ def view_customers(request):
 def customer_detail(request, pk):
 
     customer_obj = Customer.objects.get(pk=pk)
-
-
     request_objs = Delivery_Request.objects.filter(customer_id=customer_obj.id)
 
+    for r in request_objs:
+        receipt = Delivery_Receipt.objects.get(control_number = r.control_number)
+        
+        # normal_division = str(r.package.package_weight / r.weight_cost_matrix.base_weight)
+        # modulo_division = str(r.package.package_weight % r.weight_cost_matrix.base_weight)
+        weight = r.package.package_weight
+        r.cost = 0
 
+        if (r.package.package_weight < r.weight_cost_matrix.base_weight):
+            r.cost = r.weight_cost_matrix.base_cost
+        else:
+            r.cost += r.weight_cost_matrix.base_cost
+            weight -= r.weight_cost_matrix.base_weight
+            normal_division = weight / r.weight_cost_matrix.increment_weight
+            count = int(normal_division)
+            r.cost += int(normal_division) * r.weight_cost_matrix.increment_cost
+
+            if (normal_division - count) != 0:
+                r.cost += r.weight_cost_matrix.increment_cost
+
+
+        if (receipt):
+            r.delivered = "Delivered"
+        else:
+            r.delivered = "Not Delivered"
     context = {
 
         "customers": customer_obj,
@@ -95,6 +117,14 @@ def customer_detail(request, pk):
 
 def packages_list(request):
     request_objs = Delivery_Request.objects.all()
+
+    for r in request_objs:
+        receipt = Delivery_Receipt.objects.get(control_number = r.control_number)
+        
+        if (receipt):
+            r.delivered = "Delivered"
+        else:
+            r.delivered = "Not Delivered"
 
     context = {
         "requests": request_objs,
@@ -115,6 +145,14 @@ def reports(request):
 
     request_objs = Delivery_Request.objects.filter(route__origin_area=origin).filter(route__destination_area=destination)
 
+
+    for r in request_objs:
+        receipt = Delivery_Receipt.objects.get(control_number = r.control_number)
+        
+        if (receipt):
+            r.delivered = "Delivered"
+        else:
+            r.delivered = "Not Delivered"
     context = {
         "origin": origin,
         "destination": destination,

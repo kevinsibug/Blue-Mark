@@ -1,9 +1,19 @@
 {% extends "base.html" %} {% block page_content %}
 
-<div class="mw6 center pa3 sans-serif">
+<div class="mw8 center pa3 sans-serif">
 <h1 class = "mb4">{{origin}} to {{destination}} Packages</h1>
+
+        <div class="dt dt--fixed">
+          <div class="dtc tc pv4">Control Number</div>
+          <div class="dtc tc pv4">Request Date</div>
+          <div class="dtc tc pv4">Sender</div>
+          <div class="dtc tc pv4">Receiver</div>
+          <div class="dtc tc pv4">Package Type</div>
+          <div class="dtc tc pv4">Package Weight</div>
+          <div class="dtc tc pv4">Status</div>
+        </div>
   {% for r in requests %}
-  <div class="pa2 mb3 striped--near-white">
+  {% comment %} <div class="pa2 mb3 striped--near-white">
     <div class="pl2">
       <p class="mb2">Control Number: {{ r.control_number }}</p>
       <p class="mb2">Request Date: {{ r.request_date }}</p>
@@ -12,8 +22,26 @@
       <p class="mb2">Package Type: {{ r.package.package_type}}</p>
       <p class="mb2">Package Weight: {{ r.package.package_weight}} g</p>
     </div>
-  </div>
+  </div> {% endcomment %}
 
+
+        <div class="dt dt--fixed">
+          <div class="dtc tc pv4 bg-black-10">{{ r.control_number }}</div>
+          <div class="dtc tc pv4 bg-black-10">{{ r.request_date }}</div>
+          <div class="dtc tc pv4 bg-black-10">
+            {{ r.customer.firstname}} {{ r.customer.lastname}}
+          </div>
+          <div class="dtc tc pv4 bg-black-10">
+            {{ r.receiver.firstname}} {{ r.receiver.lastname}}
+          </div>
+          <div class="dtc tc pv4 bg-black-10">{{ r.package.package_type}}</div>
+          <div class="dtc tc pv4 bg-black-10">
+            {{ r.package.package_weight}}
+          </div>
+          <div class="dtc tc pv4 bg-black-10">{{ r.delivered}}</div>
+        </div>
+
+        <br />
   {% endfor %} 
 </div>
 {% endblock %}
