@@ -52,7 +52,7 @@ def customer_confirmation(request):
 
     if route == 'Luzon to Luzon':
         if package.package_type == 'LTR':
-            if int(packageweight) < 100:
+            if int(packageweight) > 0 && int(packageweight) < 100:
                 weightcostmatrix = Weight_Cost_Matrix(
                 base_weight=packageweight,
                 base_cost=70.00,
@@ -62,7 +62,7 @@ def customer_confirmation(request):
                 route=route
                 )
                 weightcostmatrix.save()
-            elif packageweight > 100:
+            elif int(packageweight) >= 100 && int(packageweight) < 200:
                 weightcostmatrix = Weight_Cost_Matrix(
                 base_weight=100,
                 base_cost=70.00,
@@ -74,7 +74,7 @@ def customer_confirmation(request):
                 weightcostmatrix.save()
 
         elif package.package_type == 'PCK':
-            if int(packageweight) < 500:
+            if int(packageweight) > 200 && int(packageweight) < 500:
                 weightcostmatrix = Weight_Cost_Matrix(
                 base_weight=packageweight,
                 base_cost=90.00,
@@ -84,7 +84,7 @@ def customer_confirmation(request):
                 route=route
                 )
                 weightcostmatrix.save()
-            elif packageweight > 500:
+            elif int(packageweight) >= 500 && int(packageweight) < 1000:
                 weightcostmatrix = Weight_Cost_Matrix(
                 base_weight=500,
                 base_cost=90.00,
@@ -96,7 +96,7 @@ def customer_confirmation(request):
                 weightcostmatrix.save()
 
         elif package.package_type == 'PAR':
-            if int(packageweight) < 1500:
+            if int(packageweight) > 1000 && int(packageweight) < 1500:
                 weightcostmatrix = Weight_Cost_Matrix(
                 base_weight=packageweight,
                 base_cost=150.00,
@@ -106,7 +106,7 @@ def customer_confirmation(request):
                 route=route
                 )
                 weightcostmatrix.save()
-            elif packageweight > 1500:
+            elif int(packageweight) >= 1500 && int(packageweight) < 2000:
                 weightcostmatrix = Weight_Cost_Matrix(
                 base_weight=1500,
                 base_cost=150.00,
@@ -118,7 +118,7 @@ def customer_confirmation(request):
                 weightcostmatrix.save()
 
         elif package.package_type == 'BOX':
-            if int(packageweight) < 2500:
+            if int(packageweight) > 2000 && int(packageweight) < 2500:
                 weightcostmatrix = Weight_Cost_Matrix(
                 base_weight=packageweight,
                 base_cost=170.00,
@@ -128,7 +128,7 @@ def customer_confirmation(request):
                 route=route
                 )
                 weightcostmatrix.save()
-            elif packageweight > 2500:
+            elif int(packageweight) >= 2500 && int(packageweight) < 3000:
                 weightcostmatrix = Weight_Cost_Matrix(
                 base_weight=1500,
                 base_cost=170.00,
