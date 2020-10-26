@@ -29,142 +29,46 @@ def customer_confirmation(request):
     packagetype = request.POST['packagetype']
     packageweight = request.POST['packageweight']
 
-
-    deliverystaff = Delivery_Staff(staff_firstname="Juan", staff_lastname="Dela Cruz")
-    deliverystaff.save()
-
-    customer = Customer(firstname=firstname, lastname=lastname, address=address, phone=phonenum)
-    customer.save()
-
-
-    recipient = Recipient(firstname=recipientfirstname, lastname=recipientlastname, address=recipientaddress, phone=recipientphone)
-    recipient.save()
+    # customer_objs  = Customer.objects.all()
+    customer_objs = Customer.objects.filter(firstname=firstname).filter(lastname=lastname)
+    if (customer_objs):
+        pass
+    else:
+        customer = Customer(firstname=firstname, lastname=lastname, address=address, phone=phonenum)
+        customer.save()
 
 
-    service = Service(service_type=servicetype)
-    service.save()
-
-    if service.service_type == 'Express':
-        service = Service(service_type=servicetype, delivery_time='Next Day')
-        service.save()
-        print(type(service))
-    elif service.service_type == 'Ordinary':
-        service = Service(service_type=servicetype, delivery_time='3 to 4 Days')
-        service.save()
-
-    route = Route(origin_area=originarea, destination_area=destinationarea)
-    route.save()
-
-
-    recipient = Recipient(firstname=recipientfirstname, lastname=recipientlastname, address=recipientaddress, phone=recipientphone)
-    recipient.save()
+    recipient_objs = Recipient.objects.filter(firstname=recipientfirstname).filter(lastname=recipientlastname)
+    if (recipient_objs):
+        pass
+    else:
+        recipient = Recipient(firstname=recipientfirstname, lastname=recipientlastname, address=recipientaddress, phone=recipientphone)
+        recipient.save()
 
 
     package = Package(package_type=packagetype, package_weight=packageweight)
     package.save()
 
-    if service.service_type == 'Express' and route.origin_area == 'Luzon' and route.destination_area == 'Luzon' :
-        if package.package_type == 'LTR':
-            if int(packageweight) > 0 and int(packageweight) < 100:
-                weightcostmatrix = Weight_Cost_Matrix(
-                base_weight=packageweight,
-                base_cost=70.00,
-                increment_weight=0,
-                increment_cost=0,
-                service=service,
-                route=route
-                )
-                weightcostmatrix.save()
 
-                deliveryrequest = Delivery_Request(
-                request_date=date.today(),
-                total_cost=(weightcostmatrix.base_cost + weightcostmatrix.increment_cost),
-                customer=customer,
-                service=service,
-                package=package,
-                route=route,
-                weight_cost_matrix=weightcostmatrix,
-                receiver=recipient
-                )
-                deliveryrequest.save()
-                print('hello')
+    customer_obj = Customer.objects.get(firstname = firstname, lastname = lastname)
+    recipient_obj = Recipient.objects.get(firstname = recipientfirstname, lastname = recipientlastname)
+    service_obj = Service.objects.get(service_type = servicetype)
+    route_obj = Route.objects.get(origin_area = originarea, destination_area = destinationarea)
+    # weightcostmatrix_obj = (Weight_Cost_Matrix.objects.filter(service  = service_obj).filter(route = route_obj).filter(package_type = packagetype))
+    # print(weightcostmatrix_obj)
+    weightcostmatrix_obj = Weight_Cost_Matrix.objects.get(service = service_obj, route = route_obj, package_type = packagetype)
 
-            elif int(packageweight) >= 100 and int(packageweight) < 200:
-                weightcostmatrix = Weight_Cost_Matrix(
-                base_weight=100,
-                base_cost=70.00,
-                increment_weight=packageweight-100,
-                increment_cost=35.00,
-                service=service,
-                route=route
-                )
-                weightcostmatrix.save()
+    deliveryrequest = Delivery_Request(
+        request_date=date.today(),
+        total_cost=0,
+        customer=customer_obj,
+        service=service_obj,
+        package=package,
+        route=route_obj,
+        weight_cost_matrix=weightcostmatrix_obj,
+        receiver=recipient_obj)
 
-        elif package.package_type == 'PCK':
-            if int(packageweight) > 200 and int(packageweight) < 500:
-                weightcostmatrix = Weight_Cost_Matrix(
-                base_weight=packageweight,
-                base_cost=90.00,
-                increment_weight=0,
-                increment_cost=0,
-                service=service,
-                route=route
-                )
-                weightcostmatrix.save()
-            elif int(packageweight) >= 500 and int(packageweight) < 1000:
-                weightcostmatrix = Weight_Cost_Matrix(
-                base_weight=500,
-                base_cost=90.00,
-                increment_weight=packageweight-500,
-                increment_cost=45.00,
-                service=service,
-                route=route
-                )
-                weightcostmatrix.save()
-
-        elif package.package_type == 'PAR':
-            if int(packageweight) > 1000 and int(packageweight) < 1500:
-                weightcostmatrix = Weight_Cost_Matrix(
-                base_weight=packageweight,
-                base_cost=150.00,
-                increment_weight=0,
-                increment_cost=0,
-                service=service,
-                route=route
-                )
-                weightcostmatrix.save()
-            elif int(packageweight) >= 1500 and int(packageweight) < 2000:
-                weightcostmatrix = Weight_Cost_Matrix(
-                base_weight=1500,
-                base_cost=150.00,
-                increment_weight=packageweight-1500,
-                increment_cost=75.00,
-                service=service,
-                route=route
-                )
-                weightcostmatrix.save()
-
-        elif package.package_type == 'BOX':
-            if int(packageweight) > 2000 and int(packageweight) < 2500:
-                weightcostmatrix = Weight_Cost_Matrix(
-                base_weight=packageweight,
-                base_cost=170.00,
-                increment_weight=0,
-                increment_cost=0,
-                service=service,
-                route=route
-                )
-                weightcostmatrix.save()
-            elif int(packageweight) >= 2500 and int(packageweight) < 3000:
-                weightcostmatrix = Weight_Cost_Matrix(
-                base_weight=1500,
-                base_cost=170.00,
-                increment_weight=packageweight-2500,
-                increment_cost=85.00,
-                service=service,
-                route=route
-                )
-                weightcostmatrix.save()
+    deliveryrequest.save()
 
     return render(request,'customerconfirmation.html',
 
@@ -200,7 +104,10 @@ def customer_detail(request, pk):
     request_objs = Delivery_Request.objects.filter(customer_id=customer_obj.id)
 
     for r in request_objs:
-        receipt = Delivery_Receipt.objects.get(control_number = r.control_number)
+        try:
+            receipt = Delivery_Receipt.objects.get(control_number = r.control_number)
+        except Delivery_Receipt.DoesNotExist:
+            receipt = False
         
         # normal_division = str(r.package.package_weight / r.weight_cost_matrix.base_weight)
         # modulo_division = str(r.package.package_weight % r.weight_cost_matrix.base_weight)
@@ -237,8 +144,11 @@ def packages_list(request):
     request_objs = Delivery_Request.objects.all()
 
     for r in request_objs:
-        receipt = Delivery_Receipt.objects.get(control_number = r.control_number)
-        
+        try:
+            receipt = Delivery_Receipt.objects.get(control_number = r.control_number)
+        except Delivery_Receipt.DoesNotExist:
+            receipt = False
+
         if (receipt):
             r.delivered = "Delivered"
         else:
@@ -265,7 +175,10 @@ def reports(request):
 
 
     for r in request_objs:
-        receipt = Delivery_Receipt.objects.get(control_number = r.control_number)
+        try:
+            receipt = Delivery_Receipt.objects.get(control_number = r.control_number)
+        except Delivery_Receipt.DoesNotExist:
+            receipt = False
         
         if (receipt):
             r.delivered = "Delivered"
