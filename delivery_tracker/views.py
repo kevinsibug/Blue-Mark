@@ -62,20 +62,11 @@ def customer_detail(request, pk):
 
     customer_obj = Customer.objects.get(pk=pk)
 
-    # package_objs = Package.objects.filter(customer_id=customer_obj.id)
-
-    # Trial
 
     request_objs = Delivery_Request.objects.filter(customer_id=customer_obj.id)
 
-    # for r in request_objs:
-    #     print(r.weight_cost_matrix.base_cost)
-
-
 
     context = {
-
-        # "packages": package_objs,
 
         "customers": customer_obj,
 
@@ -98,4 +89,18 @@ def reports_page(request):
     context = {
         "requests": request_objs,
     }
+    return render(request, "reports_page.html", context)
+
+def reports(request):
+    origin = request.GET['origin']
+    destination = request.GET['destination']
+
+    request_objs = Delivery_Request.objects.filter(route__origin_area=origin).filter(route__destination_area=destination)
+
+    context = {
+        "origin": origin,
+        "destination": destination,
+        "requests": request_objs
+    }
+
     return render(request, "reports.html", context)
