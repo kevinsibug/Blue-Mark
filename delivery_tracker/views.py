@@ -25,8 +25,7 @@ def customer_confirmation(request):
     destinationarea = request.POST['destinationarea']
     servicetype = request.POST['servicetype']
     packagetype = request.POST['packagetype']
-    packagebweight = request.POST['packagebweight']
-    packagesweight = request.POST['packagesweight']
+    packageweight = request.POST['packageweight']
 
 
     deliverystaff = Delivery_Staff(staff_firstname="Juan", staff_lastname="Dela Cruz")
@@ -44,10 +43,10 @@ def customer_confirmation(request):
     # recipient = Recipient(firstname=recipientfirstname, lastname=recipientlastname, address=recipientaddress, phone=recipientphone)
     # recipient.save()
 
-    package = Package(package_type=packagetype, package_weight=packagebweight)
+    package = Package(package_type=packagetype, package_weight=packageweight)
     package.save()
 
-    weightcostmatrix = Weight_Cost_Matrix(base_weight=packagebweight, increment_weight=packagesweight, service=service, route=route)
+    weightcostmatrix = Weight_Cost_Matrix(service=service, route=route)
     weightcostmatrix.save()
 
     return render(request,'customerconfirmation.html',
@@ -63,8 +62,7 @@ def customer_confirmation(request):
         # 'recipientphone': request.POST.get('recipientphone'),
         'servicetype': request.POST.get('servicetype'),
         'packagetype': request.POST.get('packagetype'),
-        'packagebweight': request.POST.get('packagebweight'),
-        'packagesweight': request.POST.get('packagesweight')
+        'packageweight': request.POST.get('packageweight'),
         })
 
 def view_customers(request):

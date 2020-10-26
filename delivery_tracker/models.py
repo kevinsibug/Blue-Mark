@@ -28,7 +28,6 @@ class Package(models.Model):
         max_length=3,
         choices=PACKAGE_TYPE_CHOICES,
     )
-
     package_weight= models.IntegerField(default=0.00)
 
     def __str__(self):
@@ -77,9 +76,6 @@ class Weight_Cost_Matrix(models.Model):
     increment_cost = models.FloatField(default=0.0)
     service = models.ForeignKey(Service, on_delete=models.RESTRICT, null=False)
     route = models.ForeignKey(Route, on_delete=models.RESTRICT, null=False)
-
-
-
 
 class Delivery_Staff(models.Model):
 
