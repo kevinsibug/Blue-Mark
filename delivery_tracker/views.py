@@ -2,6 +2,8 @@ from django.shortcuts import render
 
 from delivery_tracker.models import *
 
+from datetime import date
+
 # Create your views here.
 
 def home(request):
@@ -11,16 +13,16 @@ def add_customer(request):
     return render(request, "add_customer.html")
 
 def customer_confirmation(request):
-    # firstname = request.POST['firstname']
-    # lastname = request.POST['lastname']
-    # address = request.POST['address']
+    firstname = request.POST['firstname']
+    lastname = request.POST['lastname']
+    address = request.POST['address']
     originarea = request.POST['originarea']
-    # phonenum = request.POST['phonenum']
-    #
-    # recipientfirstname = request.POST['recipientfirstname']
-    # recipientlastname = request.POST['recipientlastname']
-    # recipientaddress = request.POST['recipientaddress']
-    # recipientphone = request.POST['recipientphone']
+    phonenum = request.POST['phonenum']
+
+    recipientfirstname = request.POST['recipientfirstname']
+    recipientlastname = request.POST['recipientlastname']
+    recipientaddress = request.POST['recipientaddress']
+    recipientphone = request.POST['recipientphone']
 
     destinationarea = request.POST['destinationarea']
     servicetype = request.POST['servicetype']
@@ -31,11 +33,11 @@ def customer_confirmation(request):
     deliverystaff = Delivery_Staff(staff_firstname="Juan", staff_lastname="Dela Cruz")
     deliverystaff.save()
 
-    # customer = Customer(firstname=firstname, lastname=lastname, address=address, phone=phonenum)
-    # customer.save()
+    customer = Customer(firstname=firstname, lastname=lastname, address=address, phone=phonenum)
+    customer.save()
 
-    # recipient = Recipient(firstname=recipientfirstname, lastname=recipientlastname, address=recipientaddress, phone=recipientphone)
-    # recipient.save()
+    recipient = Recipient(firstname=recipientfirstname, lastname=recipientlastname, address=recipientaddress, phone=recipientphone)
+    recipient.save()
 
     service = Service(service_type=servicetype)
     service.save()
@@ -66,7 +68,20 @@ def customer_confirmation(request):
                 route=route
                 )
                 weightcostmatrix.save()
+
+                deliveryrequest = Delivery_Request(
+                request_date=date.today(),
+                total_cost=(weightcostmatrix.base_cost + weightcostmatrix.increment_cost),
+                customer=customer,
+                service=service,
+                package=package,
+                route=route,
+                weight_cost_matrix=weightcostmatrix,
+                receiver=recipient
+                )
+                deliveryrequest.save()
                 print('hello')
+
             elif int(packageweight) >= 100 and int(packageweight) < 200:
                 weightcostmatrix = Weight_Cost_Matrix(
                 base_weight=100,
@@ -145,16 +160,17 @@ def customer_confirmation(request):
                 weightcostmatrix.save()
 
     return render(request,'customerconfirmation.html',
-        # {'firstname': request.POST.get('firstname'),
-        # 'lastname': request.POST.get('lastname'),
-        # 'address': request.POST.get('address'),
-        {'originarea': request.POST.get('originarea'),
-        # 'phonenum': request.POST.get('phonenum'),
-        # 'recipientfirstname': request.POST.get('recipientfirstname'),
-        # 'recipientlastname': request.POST.get('recipientlastname'),
+        {'requestdate': request.POST.get('requestdate'),
+        'firstname': request.POST.get('firstname'),
+        'lastname': request.POST.get('lastname'),
+        'address': request.POST.get('address'),
+        'originarea': request.POST.get('originarea'),
+        'phonenum': request.POST.get('phonenum'),
+        'recipientfirstname': request.POST.get('recipientfirstname'),
+        'recipientlastname': request.POST.get('recipientlastname'),
         'destinationarea': request.POST.get('destinationarea'),
-        # 'recipientaddress': request.POST.get('recipientaddress'),
-        # 'recipientphone': request.POST.get('recipientphone'),
+        'recipientaddress': request.POST.get('recipientaddress'),
+        'recipientphone': request.POST.get('recipientphone'),
         'servicetype': request.POST.get('servicetype'),
         'packagetype': request.POST.get('packagetype'),
         'packageweight': request.POST.get('packageweight'),

@@ -108,8 +108,7 @@ class Delivery_Request(models.Model):
     receiver = models.ForeignKey(Recipient, on_delete=models.RESTRICT, null=False)
 
     def __str__(self):
-        return  str(self.package.id)
-        # return "[" + str(self.request_date) + "]" + " Package " + str(self.package.id) + " by " + self.customer.firstname + " " + self.customer.lastname
+        return "[" + str(self.request_date) + "]" + " Package " + str(self.package.id) + " by " + self.customer.firstname + " " + self.customer.lastname
 
 
 
