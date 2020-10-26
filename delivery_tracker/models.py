@@ -14,10 +14,10 @@ class Customer(models.Model):
         return self.firstname + " " +  self.lastname
 
 class Package(models.Model):
-    LETTER = 'LTR'
-    PARCEL = 'PAR'
-    PACKAGE = 'PCK'
-    BOX = 'BOX'
+    LETTER = 'Letter'
+    PARCEL = 'Parcel'
+    PACKAGE = 'Package'
+    BOX = 'Box'
     PACKAGE_TYPE_CHOICES = [
         (LETTER, 'Letter'),
         (PARCEL, 'Parcel'),
@@ -84,6 +84,20 @@ class Weight_Cost_Matrix(models.Model):
     increment_cost = models.FloatField(default=0.0)
     service = models.ForeignKey(Service, on_delete=models.RESTRICT, null=False)
     route = models.ForeignKey(Route, on_delete=models.RESTRICT, null=False)
+    LETTER = 'Letter'
+    PARCEL = 'Parcel'
+    PACKAGE = 'Package'
+    BOX = 'Box'
+    PACKAGE_TYPE_CHOICES = [
+        (LETTER, 'Letter'),
+        (PARCEL, 'Parcel'),
+        (PACKAGE, 'Package'),
+        (BOX, 'Box'),
+    ]
+    package_type = models.CharField(
+        max_length=3,
+        choices=PACKAGE_TYPE_CHOICES,
+    )
 
 class Delivery_Staff(models.Model):
 
