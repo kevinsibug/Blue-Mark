@@ -40,11 +40,9 @@ def customer_confirmation(request):
     if service.service_type == 'Express':
         service = Service(service_type=servicetype, delivery_time='Next Day')
         service.save()
-        print('hello')
     elif service.service_type == 'Ordinary':
         service = Service(service_type=servicetype, delivery_time='3 to 4 Days')
         service.save()
-        print('hi')
 
     route = Route(origin_area=originarea, destination_area=destinationarea)
     route.save()
@@ -55,8 +53,26 @@ def customer_confirmation(request):
     package = Package(package_type=packagetype, package_weight=packageweight)
     package.save()
 
-    weightcostmatrix = Weight_Cost_Matrix(service=service, route=route)
-    weightcostmatrix.save()
+    if package.package_type == 'LTR':
+        if int(packageweight) < 100:
+            weightcostmatrix = Weight_Cost_Matrix(base_weight=packageweight, base_cost=70.00, increment_weight=0, increment_cost=0, service=service, route=route)
+            weightcostmatrix.save()
+        elif packageweight > 100:
+            weightcostmatrix = Weight_Cost_Matrix(base_weight=100, increment_weight=packageweight - 100, service=service, route=route)
+            weightcostmatrix.save()
+
+    elif package.package_type == 'PCK':
+        weightcostmatrix = Weight_Cost_Matrix(base_weight=500, service=service, route=route)
+        weightcostmatrix.save()
+
+    elif package.package_type == 'PAR':
+        weightcostmatrix = Weight_Cost_Matrix(base_weight=1500, service=service, route=route)
+        weightcostmatrix.save()
+
+    elif package.package_type == 'BOX':
+        weightcostmatrix = Weight_Cost_Matrix(base_weight=2500, service=service, route=route)
+        weightcostmatrix.save()
+
 
     return render(request,'customerconfirmation.html',
         # {'firstname': request.POST.get('firstname'),
