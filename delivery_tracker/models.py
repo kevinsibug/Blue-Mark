@@ -79,11 +79,7 @@ class Weight_Cost_Matrix(models.Model):
     route = models.ForeignKey(Route, on_delete=models.RESTRICT, null=False)
     
 
-class Delivery_Receipt(models.Model):
 
-    control_number = models.AutoField(primary_key=True)
-    date_delivered = models.DateField(default=datetime.date.today)
-    consignee_signature = models.ImageField()
 
 class Delivery_Staff(models.Model):
 
@@ -119,3 +115,11 @@ class Delivery_Request(models.Model):
         return "[" + str(self.request_date) + "]" + " Package " + str(self.package.id) + " by " + self.customer.firstname + " " + self.customer.lastname
 
 
+
+class Delivery_Receipt(models.Model):
+
+    control_number = models.AutoField(primary_key=True)
+    date_delivered = models.DateField(default=datetime.date.today)
+    consignee_signature = models.ImageField()
+    delivery_request = models.ForeignKey(Delivery_Request, on_delete=models.RESTRICT, null=False)
+    Delivery_Staff = models.ForeignKey(Delivery_Staff, on_delete=models.RESTRICT, null=False)
