@@ -34,8 +34,16 @@ class Package(models.Model):
         return self.package_type + " " + str(self.package_weight)
 
 class Service(models.Model):
-
-    service_type = models.TextField(primary_key=True)
+    EXPRESS = 'Express'
+    ORDINARY = 'Ordinary'
+    SERVICE_TYPE_CHOICES = [
+        (EXPRESS, 'Express'),
+        (ORDINARY, 'Ordinary')
+    ]
+    service_type = models.CharField(
+        max_length=8,
+        choices=SERVICE_TYPE_CHOICES,
+    )
     delivery_time = models.CharField(max_length=20)
 
     def __str__(self):
