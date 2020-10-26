@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% block page_content %}
 
 <div class="mw6 center pa3 sans-serif">
-</h1>Reports Per Area</h1>
+<h1>Reports Per Area</h1>
   <form class="pa4 black-80" action="{% url 'reports' %}">
     <div class="measure">
       <label for="origin" class="f6 b db mb2">Origin</label>
@@ -19,6 +19,7 @@
       </small>
     </div>
     <div class="measure">
+      <br>
       <label for="destination" class="f6 b db mb2">Destination</label>
       <select
         name="destination"
@@ -33,9 +34,10 @@
         >Location of the destination of the package
       </small>
     </div>
-
-        <input type="submit" value="View Packages From Area" />
-
+        <br>
+        <input type="submit" value="View Packages From Area" /><br>
+        <br>
+        <button onclick="location.href='http://127.0.0.1:8000'" type="button"> Back</button>
   </form>
 </div>
 

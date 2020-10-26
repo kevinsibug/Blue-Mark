@@ -15,6 +15,7 @@
   <label> Date of Request</label>
   <input type="date" class="form-control" id="date" value="{{Delivery_Request.request_date|date:"Y-m-d" }}"required><br>
   <br>
+  <h3>Sender Details</h3>
   <label> First Name </label>
   <input type="text" id="firstname" name="firstname" required><br>
   <br>
@@ -22,15 +23,8 @@
   <input type="text" id="lastname" name="lastname" required><br>
   <br>
   <label> Address </label>
-  <input type="text" id="address" name="address" placeholder="House No., Street, Barangay, City, Region, Postal Code" required><br>
-  <br>
-  <label> Origin Area </label><br>
-  <select name="originarea" id="originarea" required>
-    <option value="Luzon">Luzon</option>
-    <option value="Visayas">Visayas</option>
-    <option value="Mindanao">Mindanao</option>
-  </select><br>
-  <br>
+  <input type="text" id="address" name="address" required><br>
+  <small class="f6 black-60 db mb2">House No., Street, Barangay, City, Region, Postal Code</small>
   <br>
   <label> Phone Number</label>
   <input type="text" id="phonenum" name="phonenum" required><br>
@@ -43,19 +37,14 @@
   <label> Recipient Last Name </label>
   <input type="text" id="recipientlastname" name="recipientlastname" required><br>
   <br>
-  <label> Destination Area </label><br>
-  <select name="destinationarea" id="destinationarea" required>
-    <option value="Luzon">Luzon</option>
-    <option value="Visayas">Visayas</option>
-    <option value="Mindanao">Mindanao</option>
-  </select><br>
-  <br>
   <label> Recipient Address</label>
-  <input type="text" id="recipientaddress" name="recipientaddress" required><br>
-  <br>
+  <input type="text" id="recipientaddress" name="recipientaddress" required>
+  <small class="f6 black-60 db mb2">House No., Street, Barangay, City, Region, Postal Code</small><br>
   <label> Recipient Phone Number </label>
   <input type="text" id="recipientphone" name="recipientphone" required><br>
   <br>
+
+  <h3>Package and Delivery Details</h3>
   <label> Service Type</label><br>
   <input type="radio" id="express" name="servicetype" value="Express" checked="checked">
   <label for="express">Express</label><br>
@@ -70,8 +59,22 @@
     <option value="BOX">Box</option>
   </select><br>
   <br>
+  <label> Origin Area </label><br>
+  <select name="originarea" id="originarea" required>
+    <option value="Luzon">Luzon</option>
+    <option value="Visayas">Visayas</option>
+    <option value="Mindanao">Mindanao</option>
+  </select><small class="f6 black-60 db mb2">Based on Sender's Address</small><br>
+  <label> Destination Area </label><br>
+  <select name="destinationarea" id="destinationarea" required>
+    <option value="Luzon">Luzon</option>
+    <option value="Visayas">Visayas</option>
+    <option value="Mindanao">Mindanao</option>
+  </select>  </select><small class="f6 black-60 db mb2">Based on Recipient's Address</small><br>
+  <br>
   <label> Package Weight</label><br>
   <input type="text" id="packageweight" name="packageweight" required><br>
+  <small class="f6 black-60 db mb2">in grams (g)</small><br>
 
 <br>
 
