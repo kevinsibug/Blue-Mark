@@ -25,7 +25,7 @@ class Package(models.Model):
         (BOX, 'Box'),
     ]
     package_type = models.CharField(
-        max_length=3,
+        max_length=7,
         choices=PACKAGE_TYPE_CHOICES,
     )
     package_weight= models.IntegerField(default=0.00)
@@ -95,7 +95,7 @@ class Weight_Cost_Matrix(models.Model):
         (BOX, 'Box'),
     ]
     package_type = models.CharField(
-        max_length=3,
+        max_length=7,
         choices=PACKAGE_TYPE_CHOICES,
     )
 
