@@ -30,7 +30,6 @@ def customer_confirmation(request):
     packagetype = request.POST['packagetype']
     packageweight = request.POST['packageweight']
 
-    # customer_objs  = Customer.objects.all()
     customer_objs = Customer.objects.filter(firstname=firstname).filter(lastname=lastname)
     if (customer_objs):
         pass
@@ -55,13 +54,23 @@ def customer_confirmation(request):
     recipient_obj = Recipient.objects.get(firstname = recipientfirstname, lastname = recipientlastname)
     service_obj = Service.objects.get(service_type = servicetype)
     route_obj = Route.objects.get(origin_area = originarea, destination_area = destinationarea)
-    # weightcostmatrix_obj = (Weight_Cost_Matrix.objects.filter(service  = service_obj).filter(route = route_obj).filter(package_type = packagetype))
-    # print(weightcostmatrix_obj)
     weightcostmatrix_obj = Weight_Cost_Matrix.objects.get(service = service_obj, route = route_obj, package_type = packagetype)
 
+    cost = 0
+    weight = float(packageweight)
+    if (weight < weightcostmatrix_obj.base_weight):
+            cost = weightcostmatrix_obj.base_cost
+    else:
+        cost += weightcostmatrix_obj.base_cost
+        weight -= weightcostmatrix_obj.base_weight
+        normal_division = weight / weightcostmatrix_obj.increment_weight
+        count = int(normal_division)
+        cost += int(normal_division) * weightcostmatrix_obj.increment_cost
+        if (normal_division - count) != 0:
+            cost += weightcostmatrix_obj.increment_cost
     deliveryrequest = Delivery_Request(
         request_date=date.today(),
-        total_cost=0,
+        total_cost=cost,
         customer=customer_obj,
         service=service_obj,
         package=package,
@@ -86,7 +95,8 @@ def customer_confirmation(request):
         'recipientphone': request.POST.get('recipientphone'),
         'servicetype': request.POST.get('servicetype'),
         'packagetype': request.POST.get('packagetype'),
-        'packageweight': request.POST.get('packageweight')
+        'packageweight': request.POST.get('packageweight'),
+        'totalcost': cost
         })
 
 def view_customers(request):
@@ -109,22 +119,24 @@ def customer_detail(request, pk):
         except Delivery_Receipt.DoesNotExist:
             receipt = False
 
-        # normal_division = str(r.package.package_weight / r.weight_cost_matrix.base_weight)
-        # modulo_division = str(r.package.package_weight % r.weight_cost_matrix.base_weight)
+        normal_division = str(r.package.package_weight / r.weight_cost_matrix.base_weight)
+        modulo_division = str(r.package.package_weight % r.weight_cost_matrix.base_weight)
         weight = r.package.package_weight
-        r.cost = 0
+        cost = 0
 
         if (r.package.package_weight < r.weight_cost_matrix.base_weight):
-            r.cost = r.weight_cost_matrix.base_cost
+            cost = r.weight_cost_matrix.base_cost
         else:
-            r.cost += r.weight_cost_matrix.base_cost
+            cost += r.weight_cost_matrix.base_cost
             weight -= r.weight_cost_matrix.base_weight
             normal_division = weight / r.weight_cost_matrix.increment_weight
             count = int(normal_division)
-            r.cost += int(normal_division) * r.weight_cost_matrix.increment_cost
+            cost += int(normal_division) * r.weight_cost_matrix.increment_cost
 
             if (normal_division - count) != 0:
-                r.cost += r.weight_cost_matrix.increment_cost
+                cost += r.weight_cost_matrix.increment_cost
+        r.total_cost = cost
+        r.save(update_fields=["total_cost"])
 
 
         if (receipt):

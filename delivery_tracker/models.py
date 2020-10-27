@@ -70,9 +70,6 @@ class Route(models.Model):
         max_length=8,
         choices=AREA_CHOICES
     )
-    # origin_area = models.CharField(max_length=8, default="uncategorized")
-    # destination_area = models.CharField(max_length=8, default="uncategorized")
-
     def __str__(self):
         return self.origin_area + " to " + self.destination_area
 
