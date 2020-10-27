@@ -5,82 +5,101 @@
 
 
 <div class="mw6 center pa3 sans-serif">
-  <h1 class="mb4">Create Delivery Request</h1>
+  {% load static %}
+  <center>
+  <img src='{% static 'delivery_tracker/images/box-logo.png' %}' alt="Blue Mark Box Logo" style="width:100px;height:100px;vertical-align:middle;">
+  <h1 class="mb4 blue b">Create Delivery Request</h1>
+  </center>
+
+
 
 <form action='http://127.0.0.1:8000/createdeliveryrequest/customerconfirmation/' method="POST">
   {% csrf_token %}
-  <label> Date of Request</label>
+  <label class="fl w-40 b"> Date of Request</label>
   <input type="date" class="form-control" id="date" name="requestdate" value="{{Delivery_Request.request_date|date:"Y-m-d" }}" required><br>
 
   <br>
-  <h3>Sender Details</h3>
-  <label> First Name </label>
-  <input type="text" id="firstname" name="firstname" required><br>
+  <h3 class="blue">Sender Details</h3>
   <br>
-  <label> Last Name </label>
-  <input type="text" id="lastname" name="lastname" required><br>
+  <label class="fl w-40 b"> First Name </label>
+  <input type="text" id="firstname" name="firstname" class="fl w-60" required><br>
   <br>
-  <label> Address </label>
-  <input type="text" id="address" name="address" required><br>
+  <label class="fl w-40 b"> Last Name </label>
+  <input type="text" id="lastname" name="lastname" class="fl w-60" required><br>
+  <br>
+  <label class="fl w-40 b"> Address </label>
+  <input type="text" id="address" name="address" class="fl w-60" required><br>
   <small class="f6 black-60 db mb2">House No., Street, Barangay, City, Region, Postal Code</small>
   <br>
-  <label> Phone Number</label>
-  <input type="text" id="phonenum" name="phonenum" required><br>
+  <label class="fl w-40 b"> Phone Number</label>
+  <input type="text" id="phonenum" name="phonenum" class="fl w-60" required><br>
   <br>
 
-  <h3> Recipient Details </h3>
-  <label> Recipient First Name </label>
-  <input type="text" id="recipientfirstname" name="recipientfirstname" required><br>
+  <h3 class="blue"> Recipient Details </h3>
   <br>
-  <label> Recipient Last Name </label>
-  <input type="text" id="recipientlastname" name="recipientlastname" required><br>
+  <label class="fl w-40 b"> Recipient First Name </label>
+  <input type="text" id="recipientfirstname" name="recipientfirstname" class="fl w-60" required><br>
   <br>
-  <label> Recipient Address</label>
-  <input type="text" id="recipientaddress" name="recipientaddress" required>
+  <label class="fl w-40 b"> Recipient Last Name </label>
+  <input type="text" id="recipientlastname" name="recipientlastname" class="fl w-60" required><br>
+  <br>
+  <label class="fl w-40 b"> Recipient Address</label>
+  <input type="text" id="recipientaddress" name="recipientaddress" class="fl w-60" required>
   <small class="f6 black-60 db mb2">House No., Street, Barangay, City, Region, Postal Code</small><br>
-  <label> Recipient Phone Number </label>
-  <input type="text" id="recipientphone" name="recipientphone" required><br>
+  <label class="fl w-40 b"> Recipient Phone Number </label>
+  <input type="text" id="recipientphone" name="recipientphone" class="fl w-60" required><br>
   <br>
 
-  <h3>Package and Delivery Details</h3>
-  <label> Service Type</label><br>
-  <input type="radio" id="express" name="servicetype" value="Express" checked="checked">
-  <label for="express">Express</label><br>
-  <input type="radio" id="ordinary" name="servicetype" value="Ordinary">
-  <label for="ordinary">Ordinary</label><br>
+  <h3 class="blue">Package and Delivery Details</h3>
   <br>
-  <label> Package Type</label>
-  <select name="packagetype" id="packagetype" required>
+  <label class="fl w-40 b"> Service Type</label>
+  <input type="radio" id="express" name="servicetype" value="Express" class="fl w-10" checked="checked">
+  <label for="express" class="fl w-20">Express</label>
+  <input type="radio" id="ordinary" name="servicetype" value="Ordinary" class="fl w-10">
+  <label for="ordinary" class="fl w-20">Ordinary</label>
+  <br>
+  <br>
+  <label class="fl w-40 b"> Package Type</label>
+  <select name="packagetype" id="packagetype" class="fl w-60" required>
     <option value="Letter">Letter</option>
     <option value="Package">Package</option>
     <option value="Parcel">Parcel</option>
     <option value="Box">Box</option>
   </select><br>
   <br>
-  <label> Origin Area </label><br>
-  <select name="originarea" id="originarea" required>
+  <label class="fl w-30 b"> Origin Area </label><br>
+  <small class="f6 black-60 db mb2 fl w-40">Based on Sender's Address</small>
+  <select name="originarea" id="originarea" class="fl w-60" required>
     <option value="Luzon">Luzon</option>
     <option value="Visayas">Visayas</option>
     <option value="Mindanao">Mindanao</option>
-  </select><small class="f6 black-60 db mb2">Based on Sender's Address</small><br>
-  <label> Destination Area </label><br>
-  <select name="destinationarea" id="destinationarea" required>
-    <option value="Luzon">Luzon</option>
-    <option value="Visayas">Visayas</option>
-    <option value="Mindanao">Mindanao</option>
-  </select>  </select><small class="f6 black-60 db mb2">Based on Recipient's Address</small><br>
+  </select>
   <br>
-  <label> Package Weight</label><br>
-  <input type="number" id="packageweight" name="packageweight" required><br>
+  <br>
+  <br>
+  <label class="fl w-30 b"> Destination Area </label><br>
+  <small class="f6 black-60 db mb2 fl w-40">Based on Recipient's Address</small>
+  <select name="destinationarea" id="destinationarea" class="fl w-60" required>
+    <option value="Luzon">Luzon</option>
+    <option value="Visayas">Visayas</option>
+    <option value="Mindanao">Mindanao</option>
+  </select>  </select>
+  <br>
+  <br>
+  <br>
+
+  <label class="fl w-40 b"> Package Weight</label>
+  <input type="text" id="packageweight" name="packageweight" class="fl w-60" required><br>
+
   <small class="f6 black-60 db mb2">in grams (g)</small><br>
 
 <br>
+<div align="right">
+<button onclick="location.href='http://127.0.0.1:8000'" type="button" class="f6 bn link grow br3 ph4 pv2 mb3 blue bg-white dib w7"> Back</button>
 
-<button onclick="location.href='http://127.0.0.1:8000'" type="button"> Back</button>
-
-<input type='submit' value='Submit'>
+<input type='submit' value='Submit' class="f6 bn link grow br3 ph4 pv2 mb3 white bg-blue dib w7">
 </form>
-
+</div>
 </div>
 
 {% endblock %}
