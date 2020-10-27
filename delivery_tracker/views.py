@@ -84,7 +84,6 @@ def customer_confirmation(request):
 
         {'requestdate': date.today(),
         'firstname': request.POST.get('firstname'),
-
         'lastname': request.POST.get('lastname'),
         'address': request.POST.get('address'),
         'originarea': request.POST.get('originarea'),
@@ -148,7 +147,7 @@ def customer_detail(request, pk):
 
         "customers": customer_obj,
 
-        "requests": request_objs,
+        "requests": request_objs
 
     }
     return render(request, "customer_detail.html", context)
@@ -168,7 +167,7 @@ def packages_list(request):
             r.delivered = "Not Delivered"
 
     context = {
-        "requests": request_objs,
+        "requests": request_objs
     }
     return render(request, "packages_list.html", context)
 
@@ -176,7 +175,7 @@ def reports_page(request):
     request_objs = Delivery_Request.objects.all()
 
     context = {
-        "requests": request_objs,
+        "requests": request_objs
     }
     return render(request, "reports_page.html", context)
 
