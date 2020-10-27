@@ -13,18 +13,6 @@
           <div class="dtc tc pv4">Status</div>
         </div>
   {% for r in requests %}
-  {% comment %} <div class="pa2 mb3 striped--near-white">
-    <div class="pl2">
-      <p class="mb2">Control Number: {{ r.control_number }}</p>
-      <p class="mb2">Request Date: {{ r.request_date }}</p>
-      <p class="mb2">Service: {{ r.service.service_type}}</p>
-      <p class="mb2">Route: {{ r.route}}</p>
-      <p class="mb2">Package Type: {{ r.package.package_type}}</p>
-      <p class="mb2">Package Weight: {{ r.package.package_weight}} g</p>
-    </div>
-  </div> {% endcomment %}
-
-
         <div class="dt dt--fixed">
           <div class="dtc tc pv4 bg-black-10">{{ r.control_number }}</div>
           <div class="dtc tc pv4 bg-black-10">{{ r.request_date }}</div>
