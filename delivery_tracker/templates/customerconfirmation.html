@@ -6,9 +6,9 @@
   {% load static %}
   <center>
   <img src='{% static 'delivery_tracker/images/box-logo.png' %}' alt="Blue Mark Box Logo" style="width:100px;height:100px;vertical-align:middle;">
+  <h1 class="mb4 blue">Review Transaction Details</h1>
   </center>
-  
-    <h1 class="mb4 blue">Review Transaction Details</h1>
+
 
 <label class="fl w-40 b"><b> Date of Request </b></label>
 <p> {{ requestdate }} </p><br>
@@ -61,7 +61,7 @@
 <p> {{ packageweight }} </p><br>
 <br>
 <label><b> Delivery Cost</b></label>
-<p> {{ totalcost }} php </p><br>
+<p> Php {{ totalcost }} </p><br>
 <br>
 
 <center>
