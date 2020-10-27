@@ -22,11 +22,11 @@ class Package(models.Model):
         (LETTER, 'Letter'),
         (PARCEL, 'Parcel'),
         (PACKAGE, 'Package'),
-        (BOX, 'Box'),
+        (BOX, 'Box')
     ]
     package_type = models.CharField(
         max_length=7,
-        choices=PACKAGE_TYPE_CHOICES,
+        choices=PACKAGE_TYPE_CHOICES
     )
     package_weight= models.IntegerField(default=0.00)
 
@@ -42,7 +42,7 @@ class Service(models.Model):
     ]
     service_type = models.CharField(
         max_length=8,
-        choices=SERVICE_TYPE_CHOICES,
+        choices=SERVICE_TYPE_CHOICES
     )
     delivery_time = models.CharField(max_length=20)
 
@@ -60,15 +60,15 @@ class Route(models.Model):
     AREA_CHOICES = [
         (LUZON, 'Luzon'),
         (VISAYAS, 'Visayas'),
-        (MINDANAO, 'Mindanao'),
+        (MINDANAO, 'Mindanao')
     ]
     origin_area = models.CharField(
         max_length=8,
-        choices=AREA_CHOICES,
+        choices=AREA_CHOICES
     )
     destination_area = models.CharField(
         max_length=8,
-        choices=AREA_CHOICES,
+        choices=AREA_CHOICES
     )
     # origin_area = models.CharField(max_length=8, default="uncategorized")
     # destination_area = models.CharField(max_length=8, default="uncategorized")
@@ -92,11 +92,11 @@ class Weight_Cost_Matrix(models.Model):
         (LETTER, 'Letter'),
         (PARCEL, 'Parcel'),
         (PACKAGE, 'Package'),
-        (BOX, 'Box'),
+        (BOX, 'Box')
     ]
     package_type = models.CharField(
         max_length=7,
-        choices=PACKAGE_TYPE_CHOICES,
+        choices=PACKAGE_TYPE_CHOICES
     )
 
 class Delivery_Staff(models.Model):
