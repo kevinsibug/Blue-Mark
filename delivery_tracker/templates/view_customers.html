@@ -5,9 +5,10 @@
   {% load static %}
   <center>
   <img src='{% static 'delivery_tracker/images/box-logo.png' %}' alt="Blue Mark Box Logo" style="width:100px;height:100px;vertical-align:middle;">
+  <h1 class="mb4 blue">View Customers</h1>
   </center>
 
-  <h1 class="mb4 blue">View Customers</h1>
+
   <ul class="list pl0 mt0 measure center">
 {% for c in customers %}
   <li
@@ -25,7 +26,7 @@
 <br>
 <center>
 <button onclick="location.href='http://127.0.0.1:8000'" type="button" class="f6 bn link grow br3 ph4 pv2 mb3 white bg-blue dib w7"> Back</button>
-<center>
+</center>
 </ul>
 </div>
 

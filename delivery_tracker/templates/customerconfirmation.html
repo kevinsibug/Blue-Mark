@@ -3,12 +3,17 @@
 {% block page_content %}
 
 <div class="mw6 center pa3 sans-serif">
-    <h1 class="mb4">Review Transaction Details</h1>
+  {% load static %}
+  <center>
+  <img src='{% static 'delivery_tracker/images/box-logo.png' %}' alt="Blue Mark Box Logo" style="width:100px;height:100px;vertical-align:middle;">
+  </center>
+  
+    <h1 class="mb4 blue">Review Transaction Details</h1>
 
-<label><b> Date of Request </b></label>
+<label class="fl w-40 b"><b> Date of Request </b></label>
 <p> {{ requestdate }} </p><br>
 
-<h3>Sender Details</h3>
+<h3 class="blue">Sender Details</h3>
 <label><b>First Name </b></label>
 <p> {{ firstname }} </p><br>
 <br>
@@ -25,7 +30,7 @@
 <p> {{ phonenum }} </p><br>
 <br>
 
-<h3> Recipient Details </h3>
+<h3 class="blue"> Recipient Details </h3>
 <label><b> Recipient First Name </b></label>
 <p> {{ recipientfirstname }} </p><br>
 <br>
@@ -42,7 +47,7 @@
 <p> {{ recipientphone }} </p><br>
 <br>
 
-<h3>Package Details</h3>
+<h3 class="blue">Package Details</h3>
 <label><b> Service Type</b></label><br>
 <p> {{ servicetype }} </p><br>
 <br>
@@ -57,7 +62,9 @@
 <br>
 <br>
 
-<button onclick="location.href='http://127.0.0.1:8000'" type="button"> Done</button>
+<center>
+<button onclick="location.href='http://127.0.0.1:8000'" type="button" class="f6 bn link grow br3 ph4 pv2 mb3 white bg-blue dib w7"> Done</button>
+</center>
 
 </div>
 {% endblock %}

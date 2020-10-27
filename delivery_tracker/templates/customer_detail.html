@@ -1,14 +1,17 @@
 {% extends "base.html" %} {% block page_content %}
 
 <div class="mw7 center pa3 sans-serif">
-  <h1 class="mb4">
-    Customer: {{ customers.firstname }} {{customers.lastname}}
+  {% load static %}
+  <center>
+  <img src='{% static 'delivery_tracker/images/box-logo.png' %}' alt="Blue Mark Box Logo" style="width:100px;height:100px;vertical-align:middle;">
+  <h1 class="mb4 blue">
+    Customer {{ customers.firstname }} {{customers.lastname}}
   </h1>
-
   <p class="b mb2">Address: {{ customers.address }}</p>
   <p class="b mb2">Phone: {{ customers.phone}}</p>
+  </center>
 
-  <h2 class="mt4">Delivery Requests:</h2>
+  <h2 class="mt4 blue">Delivery Requests</h2>
   {% for r in requests %}
 
   <div class="pa2 mb3 striped--near-white">
@@ -25,13 +28,13 @@
   </div>
 
   {% endfor %}
-  <br />
+  <br>
+  <center>
   <button
     onclick="location.href='http://127.0.0.1:8000/viewcustomers/'"
-    type="button"
-  >
-    Back
+    type="button" class="f6 bn link grow br3 ph4 pv2 mb3 white bg-blue dib w7"> Back
   </button>
+  </center>
 </div>
 
 {% endblock %}

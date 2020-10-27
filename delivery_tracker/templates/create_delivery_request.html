@@ -8,9 +8,10 @@
   {% load static %}
   <center>
   <img src='{% static 'delivery_tracker/images/box-logo.png' %}' alt="Blue Mark Box Logo" style="width:100px;height:100px;vertical-align:middle;">
+  <h1 class="mb4 blue b">Create Delivery Request</h1>
   </center>
 
-  <h1 class="mb4 blue b">Create Delivery Request</h1>
+
 
 <form action='http://127.0.0.1:8000/createdeliveryrequest/customerconfirmation/' method="POST">
   {% csrf_token %}
