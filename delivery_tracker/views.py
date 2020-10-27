@@ -97,6 +97,7 @@ def customer_confirmation(request):
         'servicetype': request.POST.get('servicetype'),
         'packagetype': request.POST.get('packagetype'),
         'packageweight': request.POST.get('packageweight'),
+        'totalcost': cost
         })
 
 def view_customers(request):
